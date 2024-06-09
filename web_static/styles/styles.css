@@ -126,7 +126,8 @@ main {
 
 footer {
     border-top: 1px solid #ddd;
-    height: 100px;
+    height: 60px; 
+    width: 100%;
     display: flex;
     gap: 10%;
 }
