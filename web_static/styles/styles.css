@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+footer {
+    border-top: 1px solid #ddd;
+    height: 100px;
+    display: flex;
+
+}
+
+.profile {
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+    background-color: #555;
+    background-image: url('../images/profile.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.site-name {
+    width: 150px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.sign-up {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+main {
+    padding: 20px;
+}
+
+.hero {
+    position: relative;
+    background-size: contain;
+    text-align: center;
+    margin: 50px 0;
+    height: 350px;
+    background: linear-gradient(to right, transparent, rgba(215, 215, 215, 0.5), transparent),
+        linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin: 0.5em 0;
+    padding-top: 85px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.main-button {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    margin: 50px 0;
+    padding: 10px;
+    gap: 50px;
+}
+
+.content .text {
+    flex: 1;
+}
+
+.content .text h2 {
+    font-size: 2em;
+    margin: 0.5em 0;
+}
+
+.content .text p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.section-button {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.content .image {
+    flex: 1;
+    text-align: center;
+}
+
+.content .image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.content.reverse {
+    flex-direction: row-reverse;
+}
+
+.main-button:hover,
+.section-button:hover,
+.sign-up:hover,
+.image:hover {
+    opacity: 0.5;
+    transform: scale(1.02);
+    transition: transform 0.1s ease;
+}
