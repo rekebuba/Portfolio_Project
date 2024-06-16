@@ -32,6 +32,33 @@ def get_user(user_id):
     return jsonify(user.to_dict())
 
 
+@app_views.route('/users/auth', methods=['GET'], strict_slashes=False)
+@swag_from('documentation/user/check_auth.yml', methods=['GET'])
+def check_auth():
+    """ Retrieves an user """
+    user_cookie = request.cookies.get('user_id')
+    print(user_cookie)
+    user = storage.get(User, user_cookie)
+    if not user:
+        return jsonify({'authenticated': False}), 401
+    else:
+        user = jsonify(user.to_dict())
+        user['authenticated'] = True
+        return user, 200
+
+@app_views.route('/logout', methods=['POST'], strict_slashes=False)
+def logout():
+
+    user_cookie = request.cookies.get('user_id')
+    user = storage.get(User, user_cookie)
+    if not user:
+        return jsonify({'authenticated': False}), 401
+    else:
+        response = jsonify({'message': 'Logged out successfully'})
+        response.delete_cookie('user_id')
+    return response, 201
+
+
 @app_views.route('/users/<user_id>', methods=['DELETE'],
                  strict_slashes=False)
 @swag_from('documentation/user/delete_user.yml', methods=['DELETE'])
@@ -60,16 +87,16 @@ def post_user():
     if not request.get_json():
         abort(400, description="Not a JSON")
 
-    if 'email' not in request.get_json():
-        abort(400, description="Missing email")
-    if 'password' not in request.get_json():
-        abort(400, description="Missing password")
-
     data = request.get_json()
+
+    if not data['email']:
+        data['email'] = None
+
     instance = User(**data)
     instance.save()
-    return make_response(jsonify(instance.to_dict()), 201)
-
+    response = jsonify(instance.to_dict())
+    response.set_cookie('user_id', instance.to_dict()['id'], path='/', samesite='Lax')
+    return response, 201
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 @swag_from('documentation/user/put_user.yml', methods=['PUT'])

@@ -1,5 +1,6 @@
 -- prepares a MySQL server for the project
 
+DROP DATABASE IF EXISTS key_dev_db;
 CREATE DATABASE IF NOT EXISTS key_dev_db;
 CREATE USER IF NOT EXISTS 'key_dev'@'localhost' IDENTIFIED BY 'key_dev_pwd';
 GRANT ALL PRIVILEGES ON `key_dev_db`.* TO 'key_dev'@'localhost';

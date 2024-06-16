@@ -11,8 +11,8 @@ import shlex  # for splitting the line along spaces except in double quotes
 classes = {"BaseModel": BaseModel, "User": User}
 
 
-class HBNBCommand(cmd.Cmd):
-    """ HBNH console """
+class KEYCommand(cmd.Cmd):
+    """ KEY console """
     prompt = '(hbnb) '
 
     def do_EOF(self, arg):
@@ -155,4 +155,4 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    KEYCommand().cmdloop()

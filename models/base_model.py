@@ -71,6 +71,8 @@ class BaseModel:
         if save_fs is None:
             if "password" in new_dict:
                 del new_dict["password"]
+            if "sub" in new_dict:
+                del new_dict["sub"]
         return new_dict
 
     def delete(self):
