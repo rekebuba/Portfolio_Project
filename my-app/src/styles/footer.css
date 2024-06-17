@@ -1,0 +1,81 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+}
+
+.hire-me-banner {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #007bff;
+  border-radius: 3px;
+}
+
+.hire-me-banner a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  font-weight: bold;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.profile-photo {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.footer-text {
+  max-width: 600px;
+  text-align: center;
+}
+
+.footer-text h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.footer-text p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.social-links {
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}

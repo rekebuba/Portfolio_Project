@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom'
 function Header() {
     const navigate = useNavigate();
 
-    const signInpage = () => {
-        navigate('/signin')
+    const signUpPage = () => {
+        navigate('/signup')
     };
 
     return (
@@ -18,7 +18,7 @@ function Header() {
                 <a href="#">Page</a>
                 <a href="#">Page</a>
                 <a href="#">Page</a>
-                <button className="sign-up" onClick={signInpage}>Sign Up</button>
+                <button className="sign-up" onClick={signUpPage}>Sign Up</button>
             </nav>
         </header >
     );

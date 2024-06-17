@@ -2,8 +2,14 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { useAuth } from './AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
 
 const SignUp = () => {
+    const navigate = useNavigate();
+
+    const Dashboard = () => {
+        navigate('/dashboard')
+    };
     const { signUp } = useAuth();
     const [user, setUser] = useState({} || '');
     const [email, setEmail] = useState('');
@@ -108,6 +114,7 @@ const SignUp = () => {
         try {
             await signUp(userObject);
             alert('Logged in successfully');
+            Dashboard();
         } catch (err) {
             alert('Failed to log in');
         }
@@ -118,6 +125,7 @@ const SignUp = () => {
             const userObject = jwtDecode(response.credential)
             await signUp(userObject);
             alert('Logged in with Google successfully');
+            Dashboard();
         } catch (err) {
             alert('Failed to log in with Google');
         }
@@ -146,9 +154,9 @@ const SignUp = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required />
                 </div>
-                <a href="#" className="have_acc">
+                <Link to="/login" className="have_acc">
                     Already have an account? <span style={{ textDecoration: 'underline', color: 'blue' }}>Log in here</span>
-                </a>
+                </Link>
                 <p className='warning'>{warning}</p>
                 <button className="login" type="submit">Sign Up</button>
                 <div id="signInDiv" className='googlebutton'></div>

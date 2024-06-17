@@ -11,6 +11,7 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from hashlib import md5
 
 classes = {"User": User}
 
@@ -70,10 +71,13 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id, sub=""):
+    def get(self, cls, id, sub="", user="", pas=""):
         """
-        Returns the object based on the class name and its ID, or
-        None if not found
+        Returns the object based on the class name and its ID,
+        sub: google sub,
+        user: username,
+        pas: password
+        or None if not found
         """
         if cls not in classes.values():
             return None
@@ -81,6 +85,8 @@ class DBStorage:
         all_cls = models.storage.all(cls)
         for value in all_cls.values():
             if (value.id == id or value.sub == sub):
+                return value
+            elif (value.username == user and value.password == md5(pas.encode()).hexdigest()):
                 return value
 
         return None

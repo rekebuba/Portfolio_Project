@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom'
 
 function LandingPage() {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const signInpage = () => {
-        navigate('/signin')
-    };
+    // const signInpage = () => {
+    //     navigate('/signin')
+    // };
 
     return (
         <>
@@ -57,7 +57,7 @@ function LandingPage() {
                                 journey towards faster, more accurate typing. It's easy to get started, and our platform is designed
                                 to help you achieve your goals, no matter your starting point. Let's type our way to success
                                 together!</p>
-                            <button className="section-button" onClick={signInpage}>Sigh Up</button>
+                            <button className="section-button">Sigh Up</button>
                         </div>
                         <div className="image">
                             <img src={keys} />

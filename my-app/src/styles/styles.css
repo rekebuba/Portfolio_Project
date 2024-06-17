@@ -124,7 +124,7 @@ main {
     transform: scale(1.02);
     transition: transform 0.1s ease;
 }
-
+/* 
 footer {
     border-top: 1px solid #ddd;
     height: 60px; 
@@ -160,4 +160,4 @@ footer h2 {
 
 .about {
     display: flex;
-}
+} */

@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const signUp = (userObject) => {
-        return axios.post('http://127.0.0.1:5000/api/v1/users', userObject)
+        return axios.post('http://127.0.0.1:5000/api/v1/user/login', userObject)
             .then(response => {
                 console.log(response.data)
                 setAuthenticated(true);

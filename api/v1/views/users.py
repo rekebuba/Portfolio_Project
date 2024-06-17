@@ -5,6 +5,7 @@ from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
+from hashlib import md5
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
@@ -63,9 +64,9 @@ def delete_user(user_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/users', methods=['POST'], strict_slashes=False)
+@app_views.route('/user/login', methods=['POST'], strict_slashes=False)
 @swag_from('documentation/user/post_user.yml', methods=['POST'])
-def post_user():
+def login():
     """
     Creates a user
     """
@@ -74,17 +75,23 @@ def post_user():
 
     data = request.get_json()
 
-    if not data['email']:
-        data['email'] = None
-
     try:
-        if data['sub']:
+        if not data.get('email'):
+            data['email'] = None
+
+        if data.get('sub'):
             user = storage.get(User, "", sub=data['sub'])
             if user:
                 response = jsonify(user.to_dict())
                 return response, 200
+        if data.get('username') and data.get('password'):
+            user = storage.get(
+                User, "", user=data['username'], pas=data['password'])
+            if user:
+                response = jsonify(user.to_dict())
+                return response, 200
     except Exception as e:
-        print(e)
+        print(f"exception ocured: {e}")
 
     instance = User(**data)
     instance.save()
