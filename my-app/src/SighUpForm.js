@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { useAuth } from './AuthContext';
 
-const Login = () => {
-    const { login } = useAuth();
+const SignUp = () => {
+    const { signUp } = useAuth();
     const [user, setUser] = useState({} || '');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -29,8 +29,6 @@ const Login = () => {
             document.getElementById("signInDiv"),
             { theme: "outline", size: "large", logo_alignment: 'center' }
         );
-
-        google.accounts.id.prompt()
     }, []);
 
     useEffect(() => {
@@ -108,7 +106,7 @@ const Login = () => {
         setUser(userObject);
 
         try {
-            await login(userObject);
+            await signUp(userObject);
             alert('Logged in successfully');
         } catch (err) {
             alert('Failed to log in');
@@ -118,7 +116,7 @@ const Login = () => {
     const handleGoogleCallback = async (response) => {
         try {
             const userObject = jwtDecode(response.credential)
-            await login(userObject);
+            await signUp(userObject);
             alert('Logged in with Google successfully');
         } catch (err) {
             alert('Failed to log in with Google');
@@ -128,7 +126,7 @@ const Login = () => {
     return (
         <div className="login-container">
             <h2>Sign Up</h2>
-            <form action="/home" onSubmit={
+            <form onSubmit={
                 (e) => handleSubmit(e, JSON.stringify({ "email": email, "username": username, "password": password }))
             }>
                 <div className="input-group">
@@ -160,4 +158,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default SignUp;

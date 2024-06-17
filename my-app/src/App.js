@@ -2,11 +2,11 @@ import React from 'react'
 import './styles/login.css'
 import './styles/styles.css'
 import Header from './Header';
-import LoginForm from './LoginForm'
+import SignUpForm from './SighUpForm'
 import LandingPage from './LandingPage';
 import Footer from './Footer'
 import { AuthProvider, useAuth } from './AuthContext';
-import Login from './LoginForm';
+import SignUp from './SighUpForm';
 
 const Dashboard = () => {
   const { logout } = useAuth();
@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {authenticated ? <Dashboard /> : <Login />}
+      {authenticated ? <Dashboard /> : <SignUp />}
     </div>
   );
 };
@@ -42,7 +42,7 @@ const App = () => {
   //               </div>
   //             </React.Fragment>
   //           } />
-  //         <Route path='/signin' element={<LoginForm />} />
+  //         <Route path='/signin' element={<SignUpForm />} />
   //         <Route path='/home' element={<LandingPage />} />
   //       </Routes>
   //     </Router>
