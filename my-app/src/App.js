@@ -9,6 +9,7 @@ import Footer from './Footer';
 import { AuthProvider, useAuth } from './AuthContext';
 import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
+import Dashbord from './Dashbord';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -31,7 +32,7 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: authenticated ? <HomePage /> : <h1>Welcome</h1>,
+      element: authenticated ? <HomePage /> : <HomePage />,
     },
     {
       path: '/signup',
@@ -41,10 +42,10 @@ const App = () => {
       path: '/login',
       element: <LogIn />
     },
-    // {
-    //   path: '/dashbord/:id',
-    //   // element: <Dashbord />
-    // }
+    {
+      path: '/dashbord',
+      element: <Dashbord />
+    }
   ]);
   return (
     <div className="App">
