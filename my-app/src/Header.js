@@ -12,7 +12,7 @@ function Header() {
     };
 
     return (
-        <header>
+        <header className='header'>
             <img src={logo} className="site-name" alt="Site Logo" />
             <nav>
                 <a href="#">Page</a>

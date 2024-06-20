@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     width: 98%;
@@ -124,40 +124,3 @@ main {
     transform: scale(1.02);
     transition: transform 0.1s ease;
 }
-/* 
-footer {
-    border-top: 1px solid #ddd;
-    height: 60px; 
-    width: 100%;
-    display: flex;
-    gap: 10%;
-}
-
-.profile {
-    height: 100px;
-    width: 100px;
-    border-radius: 100px;
-    background-image: url('../images/profile.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-footer a {
-    margin: 0 10px;
-    text-decoration: none;
-    align-items: top;
-}
-
-footer h2 {
-    padding: 10px;
-}
-
-.links img {
-    height: 20px;
-    padding-right: 10px;
-}
-
-.about {
-    display: flex;
-} */

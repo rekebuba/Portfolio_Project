@@ -5,7 +5,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false);
-
     useEffect(() => {
         axios.get(`http://localhost:5000/api/v1/users/${getCookie('user_id')}`)
             .then(response => {
@@ -47,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     const signUp = (userObject) => {
         return axios.post('http://127.0.0.1:5000/api/v1/user/login', userObject)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setAuthenticated(true);
                 setCookie('user_id', response.data.id, 7);
                 return response;

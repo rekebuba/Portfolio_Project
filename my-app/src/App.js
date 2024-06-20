@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/login.css';
 import './styles/styles.css'
 import './styles/footer.css'
+import './styles/dashboard.css'
 import Header from './Header';
 import SignUpForm from './SighUpForm'
 import LandingPage from './LandingPage';
@@ -9,7 +10,7 @@ import Footer from './Footer';
 import { AuthProvider, useAuth } from './AuthContext';
 import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
-import Dashbord from './Dashbord';
+import Dashbord from './Dashboard';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -31,8 +32,8 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: authenticated ? <HomePage /> : <HomePage />,
+      path: '/dashboard',
+      element: authenticated ? <Dashbord /> : <HomePage />,
     },
     {
       path: '/signup',
@@ -43,7 +44,7 @@ const App = () => {
       element: <LogIn />
     },
     {
-      path: '/dashbord',
+      path: '/dashboard',
       element: <Dashbord />
     }
   ]);

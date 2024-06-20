@@ -5,13 +5,7 @@ import { useAuth } from './AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 const SignUp = () => {
-    const navigate = useNavigate();
-
-    const Dashboard = () => {
-        navigate('/dashboard')
-    };
     const { signUp } = useAuth();
-    const [user, setUser] = useState({} || '');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,6 +17,12 @@ const SignUp = () => {
     const [passColor, setPassColor] = useState(false);
 
     const [warning, setWarning] = useState('');
+
+    const navigate = useNavigate();
+
+    const Dashboard = (userData) => {
+        navigate('/dashboard', { state : { user: userData.data } });
+    };
 
     useEffect(() => {
         /* global google */
@@ -102,19 +102,14 @@ const SignUp = () => {
 
     const handleSubmit = async (e, response) => {
         e.preventDefault();
-        if (typeof response === 'string') {
-            if (!isValid) {
-                return setWarning(errorMessage)
-            }
-            var userObject = JSON.parse(response);
+        if (!isValid) {
+            return setWarning(errorMessage)
         }
 
-        setUser(userObject);
-
         try {
-            await signUp(userObject);
+            const userData = await signUp(response);
             alert('Logged in successfully');
-            Dashboard();
+            Dashboard(userData);
         } catch (err) {
             alert('Failed to log in');
         }
@@ -123,9 +118,9 @@ const SignUp = () => {
     const handleGoogleCallback = async (response) => {
         try {
             const userObject = jwtDecode(response.credential)
-            await signUp(userObject);
+            const userData = await signUp(userObject);
             alert('Logged in with Google successfully');
-            Dashboard();
+            Dashboard(userData);
         } catch (err) {
             alert('Failed to log in with Google');
         }
@@ -135,7 +130,7 @@ const SignUp = () => {
         <div className="login-container">
             <h2>Sign Up</h2>
             <form onSubmit={
-                (e) => handleSubmit(e, JSON.stringify({ "email": email, "username": username, "password": password }))
+                (e) => handleSubmit(e, { "email": email, "username": username, "password": password })
             }>
                 <div className="input-group">
                     <label htmlFor="username">Email (optional)</label>
