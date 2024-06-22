@@ -44,9 +44,19 @@ export const AuthProvider = ({ children }) => {
 
 
     const signUp = (userObject) => {
+        return axios.post('http://127.0.0.1:5000/api/v1/user/signup', userObject)
+            .then(response => {
+                console.log(response.data)
+                setAuthenticated(true);
+                setCookie('user_id', response.data.id, 7);
+                return response;
+            });
+    };
+
+    const login = (userObject) => {
         return axios.post('http://127.0.0.1:5000/api/v1/user/login', userObject)
             .then(response => {
-                // console.log(response.data)
+                console.log(response.data)
                 setAuthenticated(true);
                 setCookie('user_id', response.data.id, 7);
                 return response;
@@ -63,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ authenticated, signUp, logout }}>
+        <AuthContext.Provider value={{ authenticated, signUp, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

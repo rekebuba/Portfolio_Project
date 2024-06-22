@@ -42,7 +42,7 @@ def logout(user_id):
         return jsonify({'authenticated': False}), 401
     else:
         response = jsonify({'message': 'Logged out successfully'})
-    return response, 201
+    return response, 200
 
 
 @app_views.route('/users/<user_id>', methods=['DELETE'],
@@ -64,11 +64,30 @@ def delete_user(user_id):
     return make_response(jsonify({}), 200)
 
 
+@app_views.route('/user/signup', methods=['POST'], strict_slashes=False)
+@swag_from('documentation/user/post_user.yml', methods=['POST'])
+def signup():
+    """create new user"""
+
+    if not request.get_json():
+        abort(400, description="Not a JSON")
+
+    data = request.get_json()
+
+    if not data.get('email'):
+        data['email'] = None
+
+    print(data)
+    instance = User(**data)
+    instance.save()
+    response = jsonify(instance.to_dict())
+    return response, 201
+
 @app_views.route('/user/login', methods=['POST'], strict_slashes=False)
 @swag_from('documentation/user/post_user.yml', methods=['POST'])
 def login():
     """
-    Creates a user
+    check if a user exists
     """
     if not request.get_json():
         abort(400, description="Not a JSON")
@@ -76,9 +95,6 @@ def login():
     data = request.get_json()
 
     try:
-        if not data.get('email'):
-            data['email'] = None
-
         if data.get('sub'):
             user = storage.get(User, "", sub=data['sub'])
             if user:
@@ -92,12 +108,6 @@ def login():
                 return response, 200
     except Exception as e:
         print(f"exception ocured: {e}")
-
-    instance = User(**data)
-    instance.save()
-    response = jsonify(instance.to_dict())
-    return response, 201
-
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 @swag_from('documentation/user/put_user.yml', methods=['PUT'])

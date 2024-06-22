@@ -32,8 +32,12 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
+      path: '/',
+      element: <HomePage />
+    },
+    {
       path: '/dashboard',
-      element: authenticated ? <Dashbord /> : <HomePage />,
+      element:<Dashbord />,
     },
     {
       path: '/signup',
@@ -43,10 +47,6 @@ const App = () => {
       path: '/login',
       element: <LogIn />
     },
-    {
-      path: '/dashboard',
-      element: <Dashbord />
-    }
   ]);
   return (
     <div className="App">

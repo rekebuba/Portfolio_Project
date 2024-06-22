@@ -5,7 +5,7 @@ import { useAuth } from './AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
-    const { signUp } = useAuth();
+    const { login } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     
@@ -33,18 +33,18 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const userData = await signUp(response);
+            const userData = await login(response);
             alert('Logged in successfully');
             Dashboard(userData);
         } catch (err) {
-            alert('Failed to log in');
+            setWarning("username or password is not correct")
         }
     };
 
     const handleGoogleCallback = async (response) => {
         try {
             const userObject = jwtDecode(response.credential)
-            const userData = await signUp(userObject);
+            const userData = await login(userObject);
             alert('Logged in with Google successfully');
             Dashboard(userData);
         } catch (err) {

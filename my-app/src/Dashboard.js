@@ -1,25 +1,49 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import logo from './images/logo.png';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const Dashbord = () => {
+    const { logout } = useAuth()
     const [userId, setUserId] = useState('');
+    const [showOptions, setShowOptions] = useState(false);
     const location = useLocation();
-    const user = location.state?.user;
+    const user = location.state?.user || '';
 
-    const handleInputChange = (e) => {
-        setUserId(e.target.value);
+    const navigate = useNavigate();
+
+    const signUpPage = () => {
+        navigate('/signup')
     };
 
-    const helloUser = (user) => {
-        if (user.name) {
-            return user.name;
-        } else if (user.username) {
-            return user.username;
+    const loginPage = () => {
+        navigate('/login');
+    };
+
+
+    const userData = (required) => {
+        if (!user) {
+            return "to CachKeys"
+        } else if (required === 'profile') {
+            console.log(user);
+        } else if (required === 'name') {
+            return user.name ? user.name : user.username;
         }
     }
 
+    const togleOption = () => {
+        setShowOptions(!showOptions);
+    }
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            alert('Logged out successfully');
+            loginPage();
+        } catch (err) {
+            alert('falild to Logged out');
+        }
+    }
     return (
         <>
             <header className='header'>
@@ -28,12 +52,21 @@ const Dashbord = () => {
                     <a href="#">Practice</a>
                     <a href="#">Test</a>
                     <a href="#">Profile</a>
-                    <button className="sign-up">Sign Up</button>
+                    {user ? <div className='profile' onClick={togleOption}>
+                        <h3>
+                            {userData('name')[0]}
+                        </h3>
+                        {showOptions && <div className='dropdown'>
+                            <ul>
+                                <li onClick={handleLogout}>Log out</li>
+                            </ul>
+                        </div>}
+                    </div> : <button className="sign-up" onClick={signUpPage}>Sign Up</button>}
                 </nav>
             </header >
             <div className="dashboard-container">
                 <header className="dashboard-header">
-                    <h1>Welcome, [{ helloUser(user) }]</h1>
+                    <h1>Welcome, {userData("name")}</h1>
                 </header>
 
                 <main className="dashboard-main">
