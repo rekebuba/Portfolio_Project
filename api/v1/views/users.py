@@ -77,7 +77,6 @@ def signup():
     if not data.get('email'):
         data['email'] = None
 
-    print(data)
     instance = User(**data)
     instance.save()
     response = jsonify(instance.to_dict())

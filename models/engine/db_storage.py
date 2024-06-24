@@ -7,13 +7,14 @@ import models
 from models.base_model import BaseModel, Base
 
 from models.user import User
+from models.page import Page
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from hashlib import md5
 
-classes = {"User": User}
+classes = {"User": User, "Page": Page}
 
 
 class DBStorage:
