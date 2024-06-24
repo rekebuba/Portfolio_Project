@@ -8,6 +8,7 @@ const Dashbord = () => {
     const [userId, setUserId] = useState('');
     const [userText, setUserText] = useState('');
     const [showOptions, setShowOptions] = useState(false);
+    const [showHistory, setShowHistory] = useState(false);
     const location = useLocation();
     const user = location.state?.user || '';
 
@@ -22,7 +23,7 @@ const Dashbord = () => {
     };
 
     const typingPage = () => {
-        navigate('/typing', { state : { text: userText } })
+        navigate('/typing', { state: { text: userText } })
     }
 
 
@@ -38,6 +39,9 @@ const Dashbord = () => {
 
     const togleOption = () => {
         setShowOptions(!showOptions);
+    }
+    const toggleHistory = () => {
+        setShowHistory(!showHistory);
     }
 
     const handleLogout = async () => {
@@ -95,6 +99,30 @@ const Dashbord = () => {
                             <p>Accuracy: <span id="accuracyResult">0%</span></p>
                         </div>
                     </section>
+                    <button className="show-history-button" onClick={toggleHistory}>Show history</button>
+                    {
+                        showHistory ?
+                            <div className='result-history'>
+                                <div className="result-container">
+                                    <div className="date-box">
+                                        <div className="month">MAY</div>
+                                        <div className="day">22</div>
+                                    </div>
+                                    <div className="result-info">
+                                        <div className="wpm">
+                                            <span className="number">49</span>
+                                            <span className="label">WPM</span>
+                                        </div>
+                                        <div className="accuracy">
+                                            <span className="number">96%</span>
+                                            <span className="label">Accuracy</span>
+                                        </div>
+                                    </div>
+                                    <button className="print-button">Print Certificate</button>
+                                </div>
+                            </div>
+                            : ''
+                    }
                 </main>
             </div>
         </>
