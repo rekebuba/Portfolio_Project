@@ -6,6 +6,7 @@ import { useAuth } from './AuthContext';
 const Dashbord = () => {
     const { logout } = useAuth()
     const [userId, setUserId] = useState('');
+    const [userText, setUserText] = useState('');
     const [showOptions, setShowOptions] = useState(false);
     const location = useLocation();
     const user = location.state?.user || '';
@@ -19,6 +20,10 @@ const Dashbord = () => {
     const loginPage = () => {
         navigate('/login');
     };
+
+    const typingPage = () => {
+        navigate('/typing', { state : { text: userText } })
+    }
 
 
     const userData = (required) => {
@@ -82,9 +87,9 @@ const Dashbord = () => {
                         <h2>Typing Speed Test</h2>
                         <div className="test-area">
                             <p id="testText">Your test text will appear here...</p>
-                            <textarea id="testInput" placeholder="Start typing to begin the test..."></textarea>
+                            <textarea id="testInput" placeholder="Start typing to begin the test..." onChange={(e) => setUserText(e.target.value)}></textarea>
                         </div>
-                        <button className="start-button">Start Test</button>
+                        <button className="start-button" onClick={typingPage}>Start Test</button>
                         <div className="results">
                             <p>WPM: <span id="wpmResult">0</span></p>
                             <p>Accuracy: <span id="accuracyResult">0%</span></p>

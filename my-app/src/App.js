@@ -3,14 +3,15 @@ import './styles/login.css';
 import './styles/styles.css'
 import './styles/footer.css'
 import './styles/dashboard.css'
+import './styles/typing.css'
 import Header from './Header';
-import SignUpForm from './SighUpForm'
 import LandingPage from './LandingPage';
 import Footer from './Footer';
 import { AuthProvider, useAuth } from './AuthContext';
 import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
 import Dashbord from './Dashboard';
+import TypingPage from './typing';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -47,6 +48,10 @@ const App = () => {
       path: '/login',
       element: <LogIn />
     },
+    {
+      path: '/typing',
+      element: <TypingPage />
+    }
   ]);
   return (
     <div className="App">
