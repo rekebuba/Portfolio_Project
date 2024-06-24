@@ -24,8 +24,8 @@ class User(BaseModel, Base):
             CheckConstraint('password IS NOT NULL OR sub IS NOT NULL'),
             CheckConstraint('username IS NOT NULL OR name IS NOT NULL')
         )
-        places = relationship("Page", backref="user")
-        # reviews = relationship("Review", backref="user")
+        pages = relationship("Page", backref="user")
+        scores = relationship("Score", backref="user")
     else:
         email = ""
         password = ""
