@@ -9,8 +9,13 @@ const Dashbord = () => {
     const [userText, setUserText] = useState('');
     const [showOptions, setShowOptions] = useState(false);
     const [showHistory, setShowHistory] = useState(false);
+
     const location = useLocation();
     const user = location.state?.user || '';
+    const { wpm, accuracy } = location.state;
+
+    // console.log(wpm)
+    // console.log(accuracy)
 
     const navigate = useNavigate();
 
@@ -50,7 +55,7 @@ const Dashbord = () => {
             alert('Logged out successfully');
             loginPage();
         } catch (err) {
-            alert('falild to Logged out');
+            alert('failed to Logged out');
         }
     }
     return (
@@ -95,8 +100,8 @@ const Dashbord = () => {
                         </div>
                         <button className="start-button" onClick={typingPage}>Start Test</button>
                         <div className="results">
-                            <p>WPM: <span id="wpmResult">0</span></p>
-                            <p>Accuracy: <span id="accuracyResult">0%</span></p>
+                            <p>WPM: <span id="wpmResult">{wpm}</span></p>
+                            <p>Accuracy: <span id="accuracyResult">{accuracy}</span></p>
                         </div>
                     </section>
                     <button className="show-history-button" onClick={toggleHistory}>Show history</button>
