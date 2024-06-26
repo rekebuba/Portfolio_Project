@@ -2,15 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 
-function Result() {
-    const [wpm, setWpm] = useState('');
-    const [accuracy, setAccuracy] = useState('');
-
+function Result({ results }) {
     const navigate = useNavigate();
 
     const Dashboard = () => {
-        console.log(accuracy)
-        navigate('/dashboard', { state: { wpm: wpm, accuracy: accuracy } })
+        navigate('/dashboard', { state: { wpm: results.wpm, accuracy: results.accuracy } })
     };
 
     function togleRefresh() {
@@ -25,11 +21,11 @@ function Result() {
                 <div className="score-container">
                     <div className="score-item">
                         <span className="score-label">speed:</span>
-                        <span className="score-value" id="wpm" onChange={(e) => setWpm(e.target.value)}></span>
+                        <span className="score-value" id="wpm">{results.wpm}</span>
                     </div>
                     <div className="score-item">
                         <span className="score-label">Accuracy:</span>
-                        <span className="score-value" id="accuracy" onChange={(e) => setAccuracy(e.target.value)}></span>
+                        <span className="score-value" id="accuracy">{results.accuracy}</span>
                     </div>
                 </div>
                 <div className='button-container'>

@@ -53,7 +53,6 @@ const App = () => {
       path: '/typing',
       element: <body className='typing-test-body'>
         <TypingPage />
-        <Result />
       </body>
     }
   ]);
