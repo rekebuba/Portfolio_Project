@@ -1,29 +1,53 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
-import { IsValidity } from './script/script';
+// import { IsValidity } from './script/script';
 
 function TypingPage() {
-    const [ validity, setValdity ] = useState('');
+    const [validity, setValdity] = useState('');
+    const [incorrectChar, setIncorrectChar] = useState(false);
     const location = useLocation();
-    const user = location.state?.text || '';
+    const text = location.state?.text || '';
+    const [styledText, setStyledText] = useState(text);
+    const [maxLength, setMaxLength] = useState(text.length)
 
     useEffect(() => {
+        const textArray = text.split('');
 
-        IsValidity();
+        // Create a new styled text array
+        const newStyledText = textArray.map((char, idx) => {
+            if (idx < validity.length) {
+                setMaxLength(validity[idx] != text[idx] ? idx + 1 : text.length);
+                return (
+                    <span
+                        className={validity[idx] === text[idx] ? 'correct-char' : 'incorrect-char'}
+                    >
+                        {char}
+                    </span>
+                );
+            }
+            return <span key={idx}>{char}</span>;
+        });
+
+        setStyledText(newStyledText);
 
     }, [validity]);
 
     return (
-        <body className='typing-test-body'>
-            <div className="typing-test-container">
-                <div className="text-to-type" id="scrollableContent">
-                    {user}
-                </div>
-                <textarea id="typing-input" className="typing-input" placeholder="Start typing here..." onChange={(e) => setValdity(e.target.value)}></textarea>
+        <div className="typing-test-container">
+            <div className="text-to-type" id="scrollableContent">
+                {styledText}
             </div>
-            <script src="script/script.js"></script>
-        </body>
+            <textarea
+                id="typing-input"
+                className="typing-input"
+                placeholder="Start typing here..."
+                onChange={(e) => setValdity(e.target.value)}
+                style={{ border: incorrectChar ? "2px solid red" : '' }}
+                maxLength={maxLength}
+                required
+            ></textarea>
+        </div>
     )
 }
 

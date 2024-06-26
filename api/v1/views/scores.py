@@ -9,7 +9,7 @@ from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 
 @app_views.route('/scores', methods=['GET'], strict_slashes=False)
-def get_pages():
+def get_scores():
     """
     Retrieves the list of all user scores
     or a specific score
@@ -21,7 +21,7 @@ def get_pages():
     return jsonify(list_scores)
 
 @app_views.route('/score/<score_id>', methods=['GET'], strict_slashes=False)
-def get_user_page(score_id):
+def get_user_score(score_id):
     """ Retrieves a score """
     score = storage.get(Score, score_id)
     if not score:
@@ -31,7 +31,7 @@ def get_user_page(score_id):
     return score, 200
 
 @app_views.route('/user/score/<user_id>', methods=['POST'], strict_slashes=False)
-def add_text_to_user_page(user_id):
+def add_score(user_id):
     """create new user score """
 
     if not request.get_json():

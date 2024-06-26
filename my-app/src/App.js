@@ -12,6 +12,7 @@ import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
 import Dashbord from './Dashboard';
 import TypingPage from './typing';
+import Result from './Result';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -38,7 +39,7 @@ const App = () => {
     },
     {
       path: '/dashboard',
-      element:<Dashbord />,
+      element: <Dashbord />,
     },
     {
       path: '/signup',
@@ -50,7 +51,10 @@ const App = () => {
     },
     {
       path: '/typing',
-      element: <TypingPage />
+      element: <body className='typing-test-body'>
+        <TypingPage />
+        <Result />
+      </body>
     }
   ]);
   return (
