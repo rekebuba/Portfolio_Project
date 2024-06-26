@@ -97,3 +97,65 @@
 .container {
     position: relative;
 }
+
+.congrats-container {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    color: #333333;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.congrats-message h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #35477d;
+}
+
+.congrats-message p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.score-container {
+    margin: 20px 0;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.score-label {
+    font-weight: bold;
+}
+
+.score-value {
+    font-size: 1.2em;
+}
+
+.button-container {
+    margin: 20px;
+    display: flex;
+    gap: 4rem;
+}
+
+.retry-button {
+    background-color: #72c2d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.retry-button:hover {
+    background-color: #5aa4b8;
+}
