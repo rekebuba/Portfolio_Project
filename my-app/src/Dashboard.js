@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import logo from './images/logo.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import UserHist from './UserHist'
 
 const Dashbord = () => {
     const { logout, userData } = useAuth()
     const [userText, setUserText] = useState('');
     const [showOptions, setShowOptions] = useState(false);
-    const [showHistory, setShowHistory] = useState(false);
     const [username, setUserName] = useState('');
     const [userId, setUserId] = useState('');
 
@@ -30,9 +30,7 @@ const Dashbord = () => {
     const togleOption = () => {
         setShowOptions(!showOptions);
     }
-    const toggleHistory = () => {
-        setShowHistory(!showHistory);
-    }
+    
 
     const handleLogout = async () => {
         try {
@@ -98,35 +96,8 @@ const Dashbord = () => {
                             <textarea id="testInput" placeholder="Start typing to begin the test..." onChange={(e) => setUserText(e.target.value)}></textarea>
                         </div>
                         <button className="start-button" onClick={typingPage}>Start Test</button>
-                        <div className="results">
-                            <p>WPM: <span id="wpmResult">{"wpm"}</span></p>
-                            <p>Accuracy: <span id="accuracyResult">{"accuracy"}%</span></p>
-                        </div>
                     </section>
-                    <button className="show-history-button" onClick={toggleHistory}>Show history</button>
-                    {
-                        showHistory ?
-                            <div className='result-history'>
-                                <div className="result-container">
-                                    <div className="date-box">
-                                        <div className="month">MAY</div>
-                                        <div className="day">22</div>
-                                    </div>
-                                    <div className="result-info">
-                                        <div className="wpm">
-                                            <span className="number">49</span>
-                                            <span className="label">WPM</span>
-                                        </div>
-                                        <div className="accuracy">
-                                            <span className="number">96%</span>
-                                            <span className="label">Accuracy</span>
-                                        </div>
-                                    </div>
-                                    <button className="print-button">Print Certificate</button>
-                                </div>
-                            </div>
-                            : ''
-                    }
+                    <UserHist userId={userId} />
                 </main>
             </div>
         </>

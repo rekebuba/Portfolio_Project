@@ -8,17 +8,22 @@ from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 from flasgger.utils import swag_from
 
-@app_views.route('/scores', methods=['GET'], strict_slashes=False)
-def get_scores():
+@app_views.route('user/score/<user_id>', methods=['GET'], strict_slashes=False)
+def get_scores(user_id):
     """
-    Retrieves the list of all user scores
-    or a specific score
+    Retrieves the list of all user score
     """
+    user = storage.get(User, user_id)
+    if not user:
+        abort(400, description="invalid user")
+
     all_scores = storage.all(Score).values()
     list_scores = []
     for score in all_scores:
-        list_scores.append(score.to_dict())
-    return jsonify(list_scores)
+        if score.user_id == user_id:
+            list_scores.append(score.to_dict())
+    sorted_data = sorted(list_scores, key=lambda x: x["created_at"])
+    return jsonify(sorted_data)
 
 @app_views.route('/score/<score_id>', methods=['GET'], strict_slashes=False)
 def get_user_score(score_id):

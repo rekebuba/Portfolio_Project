@@ -1,21 +1,14 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { saveScore } from './api';
-import { useAuth } from './AuthContext';
 
 function Result({ user_id, results }) {
     const navigate = useNavigate();
-
-    console.log(user_id)
-    console.log(results);
 
     const Dashboard = () => {
         saveScore(user_id, results);
         navigate('/dashboard', { state: { wpm: results.wpm, accuracy: results.accuracy } })
     };
-
-
 
     function togleRefresh() {
         window.location.reload();

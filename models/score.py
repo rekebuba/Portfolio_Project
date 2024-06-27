@@ -10,9 +10,9 @@ from sqlalchemy.orm import relationship
 class Score(BaseModel, Base):
     """Representation of a score that a user practices"""
     if models.storage_t == 'db':
-        __tablename__ = 'scores'
+        __tablename__ = 'score'
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-        wpm  = Column(Integer)
+        wpm = Column(Integer)
         accuracy = Column(Integer)
         avrage = Column(Integer)
 
