@@ -66,6 +66,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-header h1 {
@@ -218,6 +220,7 @@
     display: flex;
     justify-content: right;
 }
+
 .show-history-button {
     background-color: #5cb85c;
     color: white;

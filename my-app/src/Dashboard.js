@@ -1,52 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import logo from './images/logo.png';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import UserHist from './UserHist'
+import Header from './Header';
 
 const Dashbord = () => {
-    const { logout, userData } = useAuth()
+    const { userData } = useAuth()
     const [userText, setUserText] = useState('');
-    const [showOptions, setShowOptions] = useState(false);
     const [username, setUserName] = useState('');
     const [userId, setUserId] = useState('');
 
-    const location = useLocation();
-    // const { wpm, accuracy } = location.state || '';
     const navigate = useNavigate();
-
-    const signUpPage = () => {
-        navigate('/signup')
-    };
-
-    const loginPage = () => {
-        navigate('/login');
-    };
 
     const typingPage = () => {
         navigate('/typing', { state: { text: userText, user_id: userId } })
     }
 
-    const togleOption = () => {
-        setShowOptions(!showOptions);
-    }
-    
-
-    const handleLogout = async () => {
-        try {
-            await logout();
-            alert('Logged out successfully');
-            loginPage();
-        } catch (err) {
-            alert('failed to Logged out');
-        }
-    }
 
     useEffect(() => {
         const fetchUserName = async () => {
             const data = await userData();
             if (data) {
-                setUserName(data.name);
+                setUserName(data.name ? data.name : data.username);
                 setUserId(data.id);
             }
         };
@@ -57,28 +32,11 @@ const Dashbord = () => {
 
     return (
         <>
-            <header className='header'>
-                <img src={logo} className="site-name" alt="Site Logo" />
-                <nav>
-                    <a href="#">Practice</a>
-                    <a href="#">Test</a>
-                    <a href="#">Profile</a>
-                    {username ? <div className='profile' onClick={togleOption}>
-                        <h3>
-                            {username[0]}
-                        </h3>
-                        {showOptions && <div className='dropdown'>
-                            <ul>
-                                <li onClick={handleLogout}>Log out</li>
-                            </ul>
-                        </div>}
-                    </div> : <button className="sign-up" onClick={signUpPage}>Sign Up</button>}
-                </nav>
-            </header >
+            <Header username={username} />
             <div className="dashboard-container">
-                <header className="dashboard-header">
+                <div className="dashboard-header">
                     <h1>Welcome {username}</h1>
-                </header>
+                </div>
 
                 <main className="dashboard-main">
                     <section id="practice" className="section">
