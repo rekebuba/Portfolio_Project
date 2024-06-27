@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './images/logo.png';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const Dashbord = () => {
-    const { logout } = useAuth()
-    const [userId, setUserId] = useState('');
+    const { logout, userData } = useAuth()
     const [userText, setUserText] = useState('');
     const [showOptions, setShowOptions] = useState(false);
     const [showHistory, setShowHistory] = useState(false);
+    const [username, setUserName] = useState('');
+    const [userId, setUserId] = useState('');
 
     const location = useLocation();
-    const user = location.state?.user || '';
-    const { wpm, accuracy } = location.state;
-
-    // console.log(wpm)
-    // console.log(accuracy)
-
+    // const { wpm, accuracy } = location.state || '';
     const navigate = useNavigate();
 
     const signUpPage = () => {
@@ -28,18 +24,7 @@ const Dashbord = () => {
     };
 
     const typingPage = () => {
-        navigate('/typing', { state: { text: userText } })
-    }
-
-
-    const userData = (required) => {
-        if (!user) {
-            return "to CachKeys"
-        } else if (required === 'profile') {
-            console.log(user);
-        } else if (required === 'name') {
-            return user.name ? user.name : user.username;
-        }
+        navigate('/typing', { state: { text: userText, user_id: userId } })
     }
 
     const togleOption = () => {
@@ -58,6 +43,20 @@ const Dashbord = () => {
             alert('failed to Logged out');
         }
     }
+
+    useEffect(() => {
+        const fetchUserName = async () => {
+            const data = await userData();
+            if (data) {
+                setUserName(data.name);
+                setUserId(data.id);
+            }
+        };
+
+        fetchUserName();
+    }, []);
+
+
     return (
         <>
             <header className='header'>
@@ -66,9 +65,9 @@ const Dashbord = () => {
                     <a href="#">Practice</a>
                     <a href="#">Test</a>
                     <a href="#">Profile</a>
-                    {user ? <div className='profile' onClick={togleOption}>
+                    {username ? <div className='profile' onClick={togleOption}>
                         <h3>
-                            {userData('name')[0]}
+                            {username[0]}
                         </h3>
                         {showOptions && <div className='dropdown'>
                             <ul>
@@ -80,7 +79,7 @@ const Dashbord = () => {
             </header >
             <div className="dashboard-container">
                 <header className="dashboard-header">
-                    <h1>Welcome, {userData("name")}</h1>
+                    <h1>Welcome {username}</h1>
                 </header>
 
                 <main className="dashboard-main">
@@ -100,8 +99,8 @@ const Dashbord = () => {
                         </div>
                         <button className="start-button" onClick={typingPage}>Start Test</button>
                         <div className="results">
-                            <p>WPM: <span id="wpmResult">{wpm}</span></p>
-                            <p>Accuracy: <span id="accuracyResult">{accuracy}</span></p>
+                            <p>WPM: <span id="wpmResult">{"wpm"}</span></p>
+                            <p>Accuracy: <span id="accuracyResult">{"accuracy"}%</span></p>
                         </div>
                     </section>
                     <button className="show-history-button" onClick={toggleHistory}>Show history</button>

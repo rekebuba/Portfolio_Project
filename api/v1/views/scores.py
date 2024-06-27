@@ -38,7 +38,6 @@ def add_score(user_id):
         abort(400, description="Not a JSON")
 
     user = storage.get(User, user_id)
-
     if not user:
         abort(400, description="invalid user")
 

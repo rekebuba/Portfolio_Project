@@ -12,12 +12,12 @@ class Score(BaseModel, Base):
     if models.storage_t == 'db':
         __tablename__ = 'scores'
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-        speed  = Column(Integer)
+        wpm  = Column(Integer)
         accuracy = Column(Integer)
         avrage = Column(Integer)
 
     else:
-        speed = int
+        wpm = int
         accuracy = int
         avrage = int
 

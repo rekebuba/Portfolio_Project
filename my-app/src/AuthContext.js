@@ -6,13 +6,18 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false);
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/v1/users/${getCookie('user_id')}`)
-            .then(response => {
-                setAuthenticated(response.data.authenticated);
-            })
-            .catch(() => {
+
+        const result = async () => {
+            const data = await userData();
+            if (data) {
+                setAuthenticated(data.authenticated);
+            } else {
                 setAuthenticated(false);
-            });
+            }
+        };
+
+        result();
+
     }, []);
 
     function getCookie(name) {
@@ -20,8 +25,8 @@ export const AuthProvider = ({ children }) => {
         let ca = document.cookie.split(';');
         for (let i = 0; i < ca.length; i++) {
             let c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
         }
         return null;
     }
@@ -72,8 +77,17 @@ export const AuthProvider = ({ children }) => {
             });
     };
 
+    const userData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/v1/users/${getCookie('user_id')}`);
+            return response.data;
+        } catch (error) {
+            return false;
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ authenticated, signUp, login, logout }}>
+        <AuthContext.Provider value={{ authenticated, signUp, login, logout, userData }}>
             {children}
         </AuthContext.Provider>
     );

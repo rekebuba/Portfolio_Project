@@ -99,7 +99,6 @@
 }
 
 .congrats-container {
-    display: none;
     position: absolute;
     background-color: #ffffff;
     color: #333333;
@@ -158,4 +157,8 @@
 
 .retry-button:hover {
     background-color: #5aa4b8;
+}
+
+.caps-lock {
+    background-color: green;
 }
