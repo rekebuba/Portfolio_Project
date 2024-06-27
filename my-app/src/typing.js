@@ -1,4 +1,5 @@
 import React from 'react'
+import warning from './images/warning.png'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Result from './Result';
@@ -11,7 +12,6 @@ function TypingPage() {
     const location = useLocation();
     const text = location.state?.text || "";
     const user_id = location.state?.user_id || ""
-    // const [firstChar, setfirstChar] = useState(text[0]);
     const [styledText, setStyledText] = useState(text);
     const [maxLength, setMaxLength] = useState(text.length)
     const [startTime, setStartTime] = useState(new Date().getTime())
@@ -64,6 +64,11 @@ function TypingPage() {
 
     };
 
+    const handleKeyPress = (e) => {
+        const isOn = e.getModifierState('CapsLock');
+        setIsCapsLockOn(isOn);
+    };
+
     return (
         <>
             {
@@ -71,12 +76,20 @@ function TypingPage() {
                     (<Result user_id={user_id} results={results} />)
                     :
                     (<div className="typing-test-container">
-                        {isCapsLockOn && (<div className='caps-lock'>Hello</div>)}
+                        {isCapsLockOn && (
+                            <div className='caps-lock'>
+                                <div>
+                                    <img className='warning-img' src={warning}/>
+                                </div>
+                                <h4>Caps lock is on</h4>
+                            </div>
+                        )}
                         <div className="text-to-type" id="scrollableContent">
                             {styledText}
                         </div>
                         <textarea
-                            id="typing-input"
+                            onKeyDown={handleKeyPress}
+                            onKeyUp={handleKeyPress}
                             className="typing-input"
                             placeholder="Start typing here..."
                             onChange={handleTextChange}
