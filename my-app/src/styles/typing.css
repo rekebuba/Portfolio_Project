@@ -19,7 +19,10 @@
 }
 
 .text-to-type {
-    font-size: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 30px;
+    font-family: pt-mono, Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
     width: 100%;
     will-change: transform;
     background-position-y: -.5px;
@@ -47,17 +50,37 @@
     box-sizing: border-box;
 }
 
+/* .screenBasic-word {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+} */
+
+.screenBasic-letter {
+    border-radius: 5px;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    color: #4a4a4a;
+    display: inline-block;
+    line-height: 1.5;
+    margin: 5px 2px 5px 0;
+    min-width: 18px;
+    height: fit-content;
+}
+
 .upcoming-char {
     color: rgb(177, 177, 254);
 }
 
-.correct-char {
-    color: #4CAF50;
+#correct-char {
+    background: #edf7e7;
+    color: #95c590;
+    transition: color .12s ease-in-out;
 }
 
-.incorrect-char {
-    background-color: #FFCDD2;
-    color: #D32F2F;
+#incorrect-char {
+    background-color: #ffdcd9;
+    color: #d55b60;
 }
 
 .answer-container {

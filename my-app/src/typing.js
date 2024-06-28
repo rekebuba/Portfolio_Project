@@ -29,14 +29,14 @@ function TypingPage() {
             if (idx < validity.length) {
                 setIncorrectChar(validity[idx] !== text[idx] ? text[idx + 1] : '')
                 return (
-                    <span
-                        className={validity[idx] === text[idx] ? 'correct-char' : 'incorrect-char'}
+                    <div
+                        className="screenBasic-letter" id={validity[idx] === text[idx] ? 'correct-char' : 'incorrect-char'}
                     >
-                        {char}
-                    </span>
+                        {char === ' ' ? '\u00A0' : char}
+                    </div>
                 );
             }
-            return <span key={idx}>{char}</span>;
+            return <div className="screenBasic-letter">{char === ' ' ? '\u00A0' : char}</div>;
         });
 
         setStyledText(newStyledText);
