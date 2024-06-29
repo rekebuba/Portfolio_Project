@@ -9,11 +9,15 @@ const Dashbord = () => {
     const [userText, setUserText] = useState('');
     const [username, setUserName] = useState('');
     const [userId, setUserId] = useState('');
-
+    const [incorectFormat,  setIncorectFormat] = useState(false);
     const navigate = useNavigate();
 
     const typingPage = () => {
-        navigate('/typing', { state: { text: userText, user_id: userId } })
+        if (userText) {
+            navigate('/typing', { state: { text: userText, user_id: userId } })
+        } else {
+            setIncorectFormat(true);
+        }
     }
 
 
@@ -42,7 +46,7 @@ const Dashbord = () => {
                     <section id="practice" className="section">
                         <h2>Practice Typing</h2>
                         <div className="typing-area">
-                            <textarea id="typingInput" placeholder="Start typing..."></textarea>
+                            <textarea placeholder="Start typing..."/>
                         </div>
                         <button className="start-button">Start Practice</button>
                     </section>
@@ -50,8 +54,14 @@ const Dashbord = () => {
                     <section id="test" className="section">
                         <h2>Typing Speed Test</h2>
                         <div className="test-area">
-                            <p id="testText">Your test text will appear here...</p>
-                            <textarea id="testInput" placeholder="Start typing to begin the test..." onChange={(e) => setUserText(e.target.value)}></textarea>
+                            <textarea
+                            placeholder="Start typing to begin the test..."
+                            onChange={(e) => {
+                                setUserText(e.target.value)
+                                setIncorectFormat(false);
+                            }}
+                            style={{ border: incorectFormat ? "2px solid red" : '' }}
+                            />
                         </div>
                         <button className="start-button" onClick={typingPage}>Start Test</button>
                     </section>

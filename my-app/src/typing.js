@@ -6,71 +6,75 @@ import Result from './Result';
 import { calculateResults } from './script/script';
 
 function TypingPage() {
-    const [validity, setValidity] = useState('');
     const [incorrectChar, setIncorrectChar] = useState('');
     const [isCapsLockOn, setIsCapsLockOn] = useState(false);
     const location = useLocation();
     const text = location.state?.text || "";
     const user_id = location.state?.user_id || ""
     const [styledText, setStyledText] = useState(text);
-    const [maxLength, setMaxLength] = useState(text.length)
     const [startTime, setStartTime] = useState(new Date().getTime())
 
     const [results, setResults] = useState(null);
+    const [typedKeys, setTypedKeys] = useState('');
 
-    // useEffect(() => {
-    //     setStartTime(new Date().getTime());
-    // }, [firstChar]);
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            const key = event.key;
+
+            const isOn = event.getModifierState('CapsLock');
+            setIsCapsLockOn(isOn);
+
+            // Check for valid printable keys
+            if (
+                key.length === 1 || // Printable characters
+                key === 'Enter' ||
+                key === 'Backspace'
+            ) {
+                setTypedKeys((prevTypedKeys) => {
+                    if (key === 'Backspace') {
+                        return prevTypedKeys.slice(0, -1);
+                    } else if (key === 'Enter') {
+                        return prevTypedKeys + '\n';
+                    } else {
+                        return prevTypedKeys + key;
+                    }
+                });
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
     useEffect(() => {
         const textArray = text.split('');
         // Create a new styled text array
         const newStyledText = textArray.map((char, idx) => {
-            if (idx < validity.length) {
-                setIncorrectChar(validity[idx] !== text[idx] ? text[idx + 1] : '')
+            if (idx < typedKeys.length) {
+                // setIncorrectChar(typedKeys[idx] !== char ? text[idx = 1] : '')
                 return (
                     <div
-                        className="screenBasic-letter" id={validity[idx] === text[idx] ? 'correct-char' : 'incorrect-char'}
-                    >
+                        className={`screenBasic-letter ${typedKeys[idx] === char ? 'correct-char' : 'incorrect-char'}`}>
                         {char === ' ' ? '\u00A0' : char}
                     </div>
                 );
             }
-            return <div className="screenBasic-letter">{char === ' ' ? '\u00A0' : char}</div>;
+            return <div className={`screenBasic-letter ${idx === typedKeys.length ? 'active-char' : ''}`}>{char === ' ' ? '\u00A0' : char}</div>;
         });
 
         setStyledText(newStyledText);
 
-        if (validity.length === text.length && text.length > 0) {
-            const values = calculateResults(validity, text, startTime, new Date().getTime());
+        if (typedKeys.length === text.length) {
+            const values = calculateResults(typedKeys, text, startTime, new Date().getTime());
             setResults(values);
         }
 
-    }, [validity]);
-
-    const handleTextChange = (e) => {
-        const currentValue = e.target.value;
-        if (incorrectChar) {
-            if (e.nativeEvent.inputType !== 'deleteContentBackward' && currentValue.length > 0 && currentValue[currentValue.length - 1] !== incorrectChar) {
-                // Remove the last character from the input
-                setValidity(currentValue.slice(0, -1));
-            } else {
-                setIncorrectChar(null);
-                setValidity(currentValue);
-            }
-        } else {
-            setValidity(currentValue);
-        }
-
-    };
-
-    const handleKeyPress = (e) => {
-        const isOn = e.getModifierState('CapsLock');
-        setIsCapsLockOn(isOn);
-    };
+    }, [typedKeys]);
 
     return (
-        <>
+        <body className='typing-test-body'>
             {
                 results ?
                     (<Result user_id={user_id} results={results} />)
@@ -79,27 +83,17 @@ function TypingPage() {
                         {isCapsLockOn && (
                             <div className='caps-lock'>
                                 <div>
-                                    <img className='warning-img' src={warning}/>
+                                    <img className='warning-img' src={warning} />
                                 </div>
                                 <h4>Caps lock is on</h4>
                             </div>
                         )}
-                        <div className="text-to-type" id="scrollableContent">
+                        <div className="text-to-type">
                             {styledText}
                         </div>
-                        <textarea
-                            onKeyDown={handleKeyPress}
-                            onKeyUp={handleKeyPress}
-                            className="typing-input"
-                            placeholder="Start typing here..."
-                            onChange={handleTextChange}
-                            value={validity}
-                            style={{ border: incorrectChar ? "2px solid red" : '' }}
-                            maxLength={maxLength}
-                        />
                     </div>)
             }
-        </>
+        </body>
     )
 }
 
