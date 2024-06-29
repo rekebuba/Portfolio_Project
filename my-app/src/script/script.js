@@ -1,12 +1,9 @@
-import Result from '../Result';
-
-export function calculateResults(textTyped, originalText, startTime, endTime) {
-    const timeTakenMinutes = (endTime - startTime) / 60000; // Time in minutes
+function calculateResults(textTyped, originalText, typedTime) {
     const totalCharactersTyped = textTyped.length;
     const wordsTyped = totalCharactersTyped / 5;
 
     // Calculate WPM
-    const wpm = Math.round(wordsTyped / timeTakenMinutes);
+    const wpm = Math.round(wordsTyped / typedTime);
 
     // Calculate accuracy
     let correctCharacters = 0;

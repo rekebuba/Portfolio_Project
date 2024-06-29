@@ -3,6 +3,7 @@ import warning from './images/warning.png'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Result from './Result';
+import Timer from './Timer';
 import { calculateResults } from './script/script';
 
 function TypingPage() {
@@ -10,11 +11,10 @@ function TypingPage() {
     const [isCapsLockOn, setIsCapsLockOn] = useState(false);
     const location = useLocation();
     const text = location.state?.text || "";
-    const user_id = location.state?.user_id || ""
+    const time = location.state?.time || 0;
     const [styledText, setStyledText] = useState(text);
-    const [startTime, setStartTime] = useState(new Date().getTime())
+    const [complet, setComplet] = useState(false);
 
-    const [results, setResults] = useState(null);
     const [typedKeys, setTypedKeys] = useState('');
 
     useEffect(() => {
@@ -67,32 +67,27 @@ function TypingPage() {
         setStyledText(newStyledText);
 
         if (typedKeys.length === text.length) {
-            const values = calculateResults(typedKeys, text, startTime, new Date().getTime());
-            setResults(values);
+            setComplet(true);
         }
 
     }, [typedKeys]);
 
     return (
         <body className='typing-test-body'>
-            {
-                results ?
-                    (<Result user_id={user_id} results={results} />)
-                    :
-                    (<div className="typing-test-container">
-                        {isCapsLockOn && (
-                            <div className='caps-lock'>
-                                <div>
-                                    <img className='warning-img' src={warning} />
-                                </div>
-                                <h4>Caps lock is on</h4>
-                            </div>
-                        )}
-                        <div className="text-to-type">
-                            {styledText}
+            {<Timer format={'countUp'} initialMinutes={1} typedKeys={typedKeys} text={text} complet={complet} />}
+            <div className="typing-test-container">
+                {isCapsLockOn && (
+                    <div className='caps-lock'>
+                        <div>
+                            <img className='warning-img' src={warning} />
                         </div>
-                    </div>)
-            }
+                        <h4>Caps lock is on</h4>
+                    </div>
+                )}
+                <div className="text-to-type">
+                    {styledText}
+                </div>
+            </div>
         </body>
     )
 }

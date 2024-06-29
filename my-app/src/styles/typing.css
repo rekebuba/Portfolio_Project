@@ -120,6 +120,7 @@
     text-align: center;
     width: 80%;
     max-width: 400px;
+    z-index: 1000;
 }
 
 .congrats-message h1 {
@@ -212,4 +213,30 @@
 .shake {
     animation: shake 0.1s; /* Duration of the animation */
     animation-iteration-count: 1; /* Number of times the animation should repeat */
+}
+
+.first-char {
+    color: red;
+    z-index: 1000;
+}
+
+.first-char {
+    position: relative;
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.first-char::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
 }

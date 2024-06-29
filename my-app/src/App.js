@@ -4,6 +4,7 @@ import './styles/styles.css'
 import './styles/footer.css'
 import './styles/dashboard.css'
 import './styles/typing.css'
+import './styles/timer.css'
 import Header from './Header';
 import LandingPage from './LandingPage';
 import Footer from './Footer';
@@ -11,7 +12,7 @@ import { AuthProvider, useAuth } from './AuthContext';
 import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
 import Dashbord from './Dashboard';
-import TypingPage from './typing';
+import TypingPage from './Typing';
 import Result from './Result';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
