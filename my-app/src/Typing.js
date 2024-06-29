@@ -2,9 +2,7 @@ import React from 'react'
 import warning from './images/warning.png'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
-import Result from './Result';
 import Timer from './Timer';
-import { calculateResults } from './script/script';
 
 function TypingPage() {
     const [incorrectChar, setIncorrectChar] = useState('');

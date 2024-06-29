@@ -21,6 +21,9 @@ function Header({ username }) {
         setShowOptions(!showOptions);
     }
 
+    const testPage = () => {
+        navigate('/test', {state: {username: username}})
+    };
 
     const handleLogout = async () => {
         try {
@@ -37,7 +40,7 @@ function Header({ username }) {
             <img src={logo} className="site-name" alt="Site Logo" />
             <nav>
                 <a href="#">Practice</a>
-                <a href="#">Test</a>
+                <a onClick={testPage}>Test</a>
                 <a href="#">Profile</a>
                 {username ? <div className='profile' onClick={togleOption}>
                     <h3>

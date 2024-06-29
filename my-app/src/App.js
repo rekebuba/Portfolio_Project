@@ -5,6 +5,7 @@ import './styles/footer.css'
 import './styles/dashboard.css'
 import './styles/typing.css'
 import './styles/timer.css'
+import './styles/testTime.css'
 import Header from './Header';
 import LandingPage from './LandingPage';
 import Footer from './Footer';
@@ -13,8 +14,7 @@ import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
 import Dashbord from './Dashboard';
 import TypingPage from './Typing';
-import Result from './Result';
-
+import TestTime from './TestTime';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const HomePage = () => {
@@ -53,6 +53,10 @@ const App = () => {
     {
       path: '/typing',
       element: <TypingPage />
+    },
+    {
+      path: '/test',
+      element: <TestTime />
     }
   ]);
   return (
