@@ -15,26 +15,22 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 100%;
+    height: 80%;
 }
 
 .text-to-type {
     display: flex;
     flex-wrap: wrap;
     font-size: 30px;
-    font-family: pt-mono, Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
-    will-change: transform;
-    background-position-y: -.5px;
+    font-family: 'pt-mono', 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
     background-size: 100% 43px;
-    /* color: #333; */
     color: #4a4a4a;
     line-height: 2.5;
     margin: 5px -1px 5px 0;
-    height: 200px;
+    height: 100%;
     background-color: #f9f9f9;
     border-radius: 4px;
-    overflow: hidden;
-    transition: transform 1s ease;
+    overflow-y: scroll;
 }
 
 /* prevent the content from being selected or copied */
@@ -55,6 +51,11 @@
     margin: 5px 2px 5px 0;
     min-width: 18px;
     height: fit-content;
+}
+
+.break {
+    width: 100%;
+    height: 1px;
 }
 
 @keyframes cursorBlink {

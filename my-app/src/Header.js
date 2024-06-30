@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthContext';
 
 
-function Header({ username }) {
+function Header({ username, userId }) {
     const [showOptions, setShowOptions] = useState(false);
     const { logout } = useAuth()
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Header({ username }) {
     }
 
     const testPage = () => {
-        navigate('/test', {state: {username: username}})
+        navigate('/test', {state: {username: username, userId: userId}})
     };
 
     const handleLogout = async () => {

@@ -8,3 +8,4 @@ from api.v1.views.users import *
 from api.v1.views.pages import *
 from api.v1.views.scores import *
 from api.v1.views.index import *
+from api.v1.views.paragraphs import *

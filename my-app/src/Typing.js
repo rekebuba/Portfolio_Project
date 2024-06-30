@@ -1,6 +1,6 @@
 import React from 'react'
 import warning from './images/warning.png'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom';
 import Timer from './Timer';
 
@@ -9,11 +9,13 @@ function TypingPage() {
     const [isCapsLockOn, setIsCapsLockOn] = useState(false);
     const location = useLocation();
     const text = location.state?.text || "";
-    const time = location.state?.time || 0;
+    const timer = location.state?.timer || 0;
+    const format = location.state?.format || "";
     const [styledText, setStyledText] = useState(text);
     const [complet, setComplet] = useState(false);
 
     const [typedKeys, setTypedKeys] = useState('');
+    const scrollableDivRef = useRef(null);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -32,7 +34,7 @@ function TypingPage() {
                     if (key === 'Backspace') {
                         return prevTypedKeys.slice(0, -1);
                     } else if (key === 'Enter') {
-                        return prevTypedKeys + '\n';
+                        return prevTypedKeys + '\u21B5';
                     } else {
                         return prevTypedKeys + key;
                     }
@@ -48,18 +50,33 @@ function TypingPage() {
 
     useEffect(() => {
         const textArray = text.split('');
+
         // Create a new styled text array
         const newStyledText = textArray.map((char, idx) => {
             if (idx < typedKeys.length) {
                 // setIncorrectChar(typedKeys[idx] !== char ? text[idx = 1] : '')
-                return (
+                return (char === '\u21B5' ?
+                    <>
+                        <div
+                            className={`screenBasic-letter ${typedKeys[idx] === char ? 'correct-char' : 'incorrect-char'}`}>
+                            {char === ' ' ? '\u00A0' : char}
+                        </div>
+                        <div className={'break'}></div>
+                    </>
+                    :
                     <div
                         className={`screenBasic-letter ${typedKeys[idx] === char ? 'correct-char' : 'incorrect-char'}`}>
                         {char === ' ' ? '\u00A0' : char}
                     </div>
                 );
             }
-            return <div className={`screenBasic-letter ${idx === typedKeys.length ? 'active-char' : ''}`}>{char === ' ' ? '\u00A0' : char}</div>;
+            return (char === '\u21B5' ?
+                <>
+                    <div className={`screenBasic-letter ${idx === typedKeys.length ? 'active-char' : ''}`}>{char === ' ' ? '\u00A0' : char}</div>
+                    <div className={'break'}></div>
+                </> :
+                <div className={`screenBasic-letter ${idx === typedKeys.length ? 'active-char' : ''}`}>{char === ' ' ? '\u00A0' : char}</div>
+            );
         });
 
         setStyledText(newStyledText);
@@ -72,8 +89,8 @@ function TypingPage() {
 
     return (
         <body className='typing-test-body'>
-            {<Timer format={'countUp'} initialMinutes={1} typedKeys={typedKeys} text={text} complet={complet} />}
-            <div className="typing-test-container">
+            {<Timer format={format === 'timed' ? 'countDown' : 'countUp'} initialMinutes={timer} typedKeys={typedKeys} text={text} complet={complet} />}
+            <div ref={scrollableDivRef} className="typing-test-container">
                 {isCapsLockOn && (
                     <div className='caps-lock'>
                         <div>

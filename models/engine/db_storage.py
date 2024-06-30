@@ -9,13 +9,14 @@ from models.base_model import BaseModel, Base
 from models.user import User
 from models.page import Page
 from models.score import Score
+from models.paragraph import Paragraph
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from hashlib import md5
 
-classes = {"User": User, "Page": Page, "Score": Score}
+classes = {"User": User, "Page": Page, "Score": Score, "Paragraph": Paragraph}
 
 
 class DBStorage:
