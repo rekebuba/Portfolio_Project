@@ -25,12 +25,12 @@ function Result() {
                 <p>You've completed your typing test.</p>
                 <div className="score-container">
                     <div className="score-item">
-                        <span className="score-label">speed:</span>
+                        <span className="score-label">speed (WPM)</span>
                         <span className="score-value" id="wpm">{results.wpm}</span>
                     </div>
                     <div className="score-item">
                         <span className="score-label">Accuracy:</span>
-                        <span className="score-value" id="accuracy">{results.accuracy}</span>
+                        <span className="score-value" id="accuracy">{results.accuracy}%</span>
                     </div>
                 </div>
                 <div className='button-container'>

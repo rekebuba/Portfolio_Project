@@ -52,7 +52,6 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }
             const [minutes, seconds] = strTypedTime.split(':').map(Number);
             const TypedTime = minutes + (seconds / 60);
             const values = calculateResults(typedKeys, text, TypedTime);
-            console.log(values);
             setResults(values);
         }
     }, [complet, isTimeUp]);

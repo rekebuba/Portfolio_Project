@@ -52,7 +52,6 @@ const SignUp = () => {
             // Regular expression pattern for email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            // Test the email against the regular expression
             if (!emailRegex.test(email)) {
                 return { isValid: false, errorMessage: 'Invalid email format' };
             }
@@ -60,10 +59,8 @@ const SignUp = () => {
 
         if (user) {
             try {
-                // Await the response of the fetch call
                 const response = await fetch('http://127.0.0.1:5000/api/v1/users');
 
-                // Check if the response is ok
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
                 }
@@ -79,7 +76,6 @@ const SignUp = () => {
                 }
 
             } catch (error) {
-                // Handle any errors that occurred during the fetch
                 console.error('error fetching:', error);
             }
         } else {
@@ -155,7 +151,6 @@ const SignUp = () => {
                 <p className='warning'>{warning}</p>
                 <button className="login" type="submit">Sign Up</button>
                 <div id="signInDiv" className='googlebutton'></div>
-                {/* <a href="#" className="reset_pass">Forgot your password?</a> */}
             </form>
         </div >
     );

@@ -4,12 +4,9 @@ from models.user import User
 from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
-from flasgger.utils import swag_from
-from hashlib import md5
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
-@swag_from('documentation/user/all_users.yml')
 def get_users():
     """
     Retrieves the list of all user objects
@@ -23,7 +20,6 @@ def get_users():
 
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
-@swag_from('documentation/user/get_user.yml', methods=['GET'])
 def get_user(user_id):
     """ Retrieves an user """
     user = storage.get(User, user_id, sub=user_id)
@@ -47,7 +43,6 @@ def logout(user_id):
 
 @app_views.route('/users/<user_id>', methods=['DELETE'],
                  strict_slashes=False)
-@swag_from('documentation/user/delete_user.yml', methods=['DELETE'])
 def delete_user(user_id):
     """
     Deletes a user Object
@@ -65,7 +60,6 @@ def delete_user(user_id):
 
 
 @app_views.route('/user/signup', methods=['POST'], strict_slashes=False)
-@swag_from('documentation/user/post_user.yml', methods=['POST'])
 def signup():
     """create new user"""
 
@@ -77,13 +71,19 @@ def signup():
     if not data.get('email'):
         data['email'] = None
 
+    """check if a user exists and tried to singUp through google"""
+    if data.get('sub'):
+        user = storage.get(User, "", sub=data['sub'])
+        if user:
+            response = jsonify(user.to_dict())
+            return response, 200
+
     instance = User(**data)
     instance.save()
     response = jsonify(instance.to_dict())
     return response, 201
 
 @app_views.route('/user/login', methods=['POST'], strict_slashes=False)
-@swag_from('documentation/user/post_user.yml', methods=['POST'])
 def login():
     """
     check if a user exists
@@ -106,10 +106,10 @@ def login():
                 response = jsonify(user.to_dict())
                 return response, 200
     except Exception as e:
-        print(f"exception ocured: {e}")
+        abort(500, description="exception ocured")
+
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
-@swag_from('documentation/user/put_user.yml', methods=['PUT'])
 def put_user(user_id):
     """
     Updates a user

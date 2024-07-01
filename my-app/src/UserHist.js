@@ -24,6 +24,8 @@ function UserHist({ userId }) {
     }
 
     useEffect(() => {
+        if (!showHistory) return;
+
         const fetchUserScore = async () => {
             try {
                 const data = await getScore(userId);
@@ -57,7 +59,7 @@ function UserHist({ userId }) {
                 });
                 setStyleResult(newStyledResult);
             } catch (error) {
-                console.error('Error fetching user score:', error);
+                console.error('Error fetching user score');
             }
         };
         fetchUserScore();

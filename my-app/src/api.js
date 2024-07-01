@@ -14,7 +14,7 @@ export const getScore = async (user_id) => {
         const result = await axios.get(`http://localhost:5000/api/v1/user/score/${user_id}`);
         return result.data;
     } catch (error) {
-        console.error('Error getting score:', error);
+        console.error('Error getting score:');
         throw error;
     }
 };

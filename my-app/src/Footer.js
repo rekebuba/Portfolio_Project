@@ -1,32 +1,41 @@
 import React from 'react';
 import profile from './images/profile.jpg'
 import linkdin from './images/linkdin.png'
-import logo from './images/logo.png';
 
 function Footer() {
     return (
-        <footer>
-            <div className="footer-content">
-                <div className="hire-me-banner">
-                    <a href="https://github.com/rekebuba" target="_blank">Hire Me</a>
-                </div>
-                <div className="footer-section">
-                    <img src={profile} alt="Abubeker-Abdullahi" className="profile-photo" />
-                    <div className="footer-text">
-                        <h3>About the Developer</h3>
-                        <p>This typing practice app is a testament to my programming skills and dedication
-                            to creating seamless user experiences. I've built this project to showcase my expertise
-                            in web development, including python, React, HTML, CSS, and JavaScript.
-                            Dive into the code on <a href="https://github.com/rekebuba" target="_blank">GitHub</a> or visit my <a href="https://yourwebsite.com" target="_blank">
-                            personal website</a> to explore more of my work.</p>
-                        <div className="social-links">
-                            <a href="https://x.com/rekebuba" target="_blank">Twitter</a>
-                            <a href="https://linkedin.com/in/abubeker-abdullahi" target="_blank">LinkedIn</a>
+        <div className="footer-dark">
+            <footer>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6 col-md-3 item">
+                            <h3>Services</h3>
+                            <ul>
+                                <li><a href="/test">Typing Test</a></li>
+                                <li><a href="/dashboard">Dashboard</a></li>
+                            </ul>
+                        </div>
+                        <div className="col-sm-6 col-md-3 item">
+                            <h3>About</h3>
+                            <ul>
+                                <li><a href="/">Company</a></li>
+                                <li><a href="https://github.com/rekebuba">Team</a></li>
+                            </ul>
+                        </div>
+                        <div className="col-md-6 item text">
+                            <h3>CacheKeys</h3>
+                            <p>A typing practice app that showcases my expertise in web development, including Python, React, HTML, CSS, and JavaScript. You can find the code on GitHub or explore more of my work on my personal website.</p>
+                        </div>
+                        <div className="col item social">
+                            <a href="https://github.com/rekebuba"><i className="icon ion-social-github"></i></a>
+                            <a href="https://x.com/rekebuba"><i className="icon ion-social-twitter"></i></a>
+                            <a href="https://linkedin.com/in/abubeker-abdullahi"><i className="icon ion-social-linkedin"></i></a>
                         </div>
                     </div>
+                    <p className="copyright">CacheKeys © 2024</p>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     );
 }
 

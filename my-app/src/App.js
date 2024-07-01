@@ -6,30 +6,28 @@ import './styles/dashboard.css'
 import './styles/typing.css'
 import './styles/timer.css'
 import './styles/testTime.css'
+import './styles/header.css';
 import Header from './Header';
-import LandingPage from './LandingPage';
 import Footer from './Footer';
+import LandingPage from './LandingPage';
 import { AuthProvider, useAuth } from './AuthContext';
 import SignUp from './SighUpForm';
 import LogIn from './LoginForm'
-import Dashbord from './Dashboard';
+import Dashboard from './Dashboard';
 import TypingPage from './Typing';
 import TestTime from './TestTime';
 import Result from './Result';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-const HomePage = () => {
-  // const { logout } = useAuth();
-  // <button onClick={logout}>Logout</button>
-
-  return (
-    <div>
-      <Header />
-      <LandingPage />
-      <Footer />
-    </div>
-  );
-};
+// const HomePage = () => {
+//   return (
+//     <div>
+//       <Header />
+//       <LandingPage />
+//       <Footer />
+//     </div>
+//   );
+// };
 
 const App = () => {
   const { authenticated } = useAuth();
@@ -37,11 +35,11 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <HomePage />
+      element: <LandingPage />
     },
     {
       path: '/dashboard',
-      element: <Dashbord />,
+      element: authenticated ? <Dashboard /> : <Dashboard />,
     },
     {
       path: '/signup',

@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import UserHist from './UserHist';
 import Header from './Header';
+import Footer from './Footer'
 
-const Dashbord = () => {
+const Dashboard = () => {
     const { userData } = useAuth()
     const [userText, setUserText] = useState('');
     const [username, setUserName] = useState('');
@@ -66,8 +67,9 @@ const Dashbord = () => {
                     <UserHist userId={userId} />
                 </main>
             </div>
+            <Footer />
         </>
     );
 };
 
-export default Dashbord;
+export default Dashboard;

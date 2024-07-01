@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './images/logo.png';
+import logoName from './images/logoName.png';
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthContext';
 
@@ -10,19 +10,24 @@ function Header({ username, userId }) {
     const navigate = useNavigate();
 
     const signUpPage = () => {
-        navigate('/signup')
+        navigate('/signup');
     };
+
+    const dashboardPage = () => {
+        navigate('/dashboard');
+    }
 
     const loginPage = () => {
         navigate('/login');
     };
 
-    const togleOption = () => {
+    const toggleOption = () => {
         setShowOptions(!showOptions);
     }
 
-    const testPage = () => {
-        navigate('/test', {state: {username: username, userId: userId}})
+    const testPage = (e) => {
+        e.preventDefault();
+        navigate('/test', { state: { username: username, userId: userId } })
     };
 
     const handleLogout = async () => {
@@ -37,12 +42,13 @@ function Header({ username, userId }) {
 
     return (
         <header className='header'>
-            <img src={logo} className="site-name" alt="Site Logo" />
+            <div onClick={dashboardPage}>
+                <img src={logoName} className="site-name" alt="Site Logo" />
+            </div>
             <nav>
-                <a href="/text">Practice</a>
-                <a onClick={testPage}>Test</a>
-                <a href="#">Profile</a>
-                {username ? <div className='profile' onClick={togleOption}>
+                <a href="/dashboard">Practice</a>
+                <a href="/test" onClick={testPage}>Test</a>
+                {username ? <div className='profile' onClick={toggleOption}>
                     <h3>
                         {username[0]}
                     </h3>

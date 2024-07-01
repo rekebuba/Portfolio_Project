@@ -137,13 +137,11 @@
     position: absolute;
     background-color: #ffffff;
     color: #333333;
-    padding: 30px;
+    padding: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 80%;
-    max-width: 400px;
-    z-index: 1000;
+    width: 35%;
 }
 
 .congrats-message h1 {

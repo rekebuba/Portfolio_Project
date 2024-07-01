@@ -2,7 +2,7 @@
     background-color: #f8f9fa;
     padding: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 400px;
     margin: 50px auto;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -38,10 +38,6 @@
     text-decoration: none;
     color: rgb(244, 52, 52);
     text-decoration-color: currentcolor;
-}
-
-.reset_pass:hover {
-    text-decoration: underline;
 }
 
 .have_acc {
