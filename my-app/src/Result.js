@@ -10,7 +10,9 @@ function Result() {
     const navigate = useNavigate();
 
     const Dashboard = () => {
-        saveScore(user_id, results);
+        if (user_id) {
+            saveScore(user_id, results);
+        }
         navigate('/dashboard', { state: { wpm: results.wpm, accuracy: results.accuracy } })
     };
 

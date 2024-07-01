@@ -1,11 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 import image from './images/image.png'
 import timer from './images/timer.png'
 import keys from './images/keys.png'
 import Header from './Header';
 import Footer from './Footer';
 
+
 function LandingPage() {
+    const navigate = useNavigate();
+
+    const loginPage = () => {
+        navigate('/login');
+    };
+
+    const signUpPage = () => {
+        navigate('/signup');
+    };
+
     return (
         <>
             <Header />
@@ -47,8 +59,11 @@ function LandingPage() {
                                 journey towards faster, more accurate typing. It's easy to get started, and our platform is designed
                                 to help you achieve your goals, no matter your starting point. Let's type our way to success
                                 together!</p>
-                            <button className="section-button">login</button>
-                            <button className="section-button">Sigh Up</button>
+                            <div className='section-button'>
+                                <button className="sign-up" onClick={loginPage}>Log In</button>
+                                <button className="sign-up" onClick={signUpPage}>Sign Up</button>
+
+                            </div>
                         </div>
                         <div className="image">
                             <img src={keys} />

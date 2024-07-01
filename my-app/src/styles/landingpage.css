@@ -54,11 +54,8 @@ main {
 }
 
 .section-button {
-    background-color: #000;
-    color: #fff;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
+    display: flex;
+    gap: 20px;
 }
 
 .content .image {
@@ -78,7 +75,6 @@ main {
 }
 
 .main-button:hover,
-.section-button:hover,
 .sign-up:hover,
 .image:hover {
     opacity: 0.5;

@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles/login.css';
-import './styles/styles.css'
+import './styles/landingpage.css'
 import './styles/footer.css'
 import './styles/dashboard.css'
 import './styles/typing.css'
