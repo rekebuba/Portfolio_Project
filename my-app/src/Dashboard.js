@@ -10,6 +10,8 @@ const Dashboard = () => {
     const [userText, setUserText] = useState('');
     const [username, setUserName] = useState('');
     const [userId, setUserId] = useState('');
+    const [averageWpm, setUserAverageWpm] = useState(0);
+    const [averageAccuracy, setUserAverageAccuracy] = useState(0);
     const [incorrectFormat, setIncorrectFormat] = useState(false);
     const navigate = useNavigate();
 
@@ -34,6 +36,8 @@ const Dashboard = () => {
             if (data) {
                 setUserName(data.name ? data.name : data.username);
                 setUserId(data.id);
+                setUserAverageWpm(data.average_wpm)
+                setUserAverageAccuracy(data.average_accuracy)
             }
         };
 
@@ -47,6 +51,10 @@ const Dashboard = () => {
             <div className="dashboard-container">
                 <div className="dashboard-header">
                     <h1>Welcome {username}</h1>
+                    <div className='average-scores'>
+                        <h2>Average WPM: {averageWpm}</h2>
+                        <h2>Average Accuracy: {averageAccuracy}%</h2>
+                    </div>
                 </div>
 
                 <main className="dashboard-main">
