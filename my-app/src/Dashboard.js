@@ -13,6 +13,7 @@ const Dashboard = () => {
     const [averageWpm, setUserAverageWpm] = useState(0);
     const [averageAccuracy, setUserAverageAccuracy] = useState(0);
     const [incorrectFormat, setIncorrectFormat] = useState(false);
+    const [userPicture, setUserPicture] = useState('');
     const navigate = useNavigate();
 
     const typingPage = () => {
@@ -38,6 +39,7 @@ const Dashboard = () => {
                 setUserId(data.id);
                 setUserAverageWpm(data.average_wpm)
                 setUserAverageAccuracy(data.average_accuracy)
+                setUserPicture(data.picture);
             }
         };
 
@@ -47,12 +49,12 @@ const Dashboard = () => {
 
     return (
         <>
-            <Header username={username} userId={userId} />
+            <Header username={username} userId={userId} userPicture={userPicture}/>
             <div className="dashboard-container">
                 <div className="dashboard-header">
                     <h1>Welcome {username}</h1>
                     <div className='average-scores'>
-                        <h2>Average WPM: {averageWpm}</h2>
+                        <h2>Average WPM: {averageWpm}%</h2>
                         <h2>Average Accuracy: {averageAccuracy}%</h2>
                     </div>
                 </div>

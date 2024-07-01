@@ -36,11 +36,6 @@ header nav ul {
     padding: 20px;
 }
 
-header nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
 header nav ul li a {
     color: white;
     text-decoration: none;
@@ -71,8 +66,14 @@ header nav ul li a {
     cursor: pointer;
 }
 
+.profile img {
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+}
+
 .dropdown {
-    margin-top: 30px;
+    top: 12.5%;
     border: 1px solid #DDDDDD;
     position: absolute;
     right: 0px;

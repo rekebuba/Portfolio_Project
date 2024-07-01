@@ -70,6 +70,8 @@ def signup():
 
     if not data.get('email'):
         data['email'] = None
+        
+    print(data)
 
     """check if a user exists and tried to singUp through google"""
     if data.get('sub'):

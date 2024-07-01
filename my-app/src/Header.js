@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthContext';
 
 
-function Header({ username, userId }) {
+function Header({ username, userId, userPicture }) {
     const [showOptions, setShowOptions] = useState(false);
     const { logout } = useAuth()
     const navigate = useNavigate();
@@ -19,6 +19,7 @@ function Header({ username, userId }) {
 
     const loginPage = () => {
         navigate('/login');
+        window.location.reload();
     };
 
     const toggleOption = () => {
@@ -29,6 +30,29 @@ function Header({ username, userId }) {
         e.preventDefault();
         navigate('/test', { state: { username: username, userId: userId } })
     };
+
+    function UserExists() {
+        if (username || userPicture) {
+            return (
+                <div className='profile' onClick={toggleOption}>
+                    {userPicture ?
+                        <img src={userPicture} />
+                        :
+                        <h3>{username[0]}</h3>
+                        }
+                    {showOptions && <div className='dropdown'>
+                        <ul>
+                            <li onClick={handleLogout}>Log out</li>
+                        </ul>
+                    </div>}
+                </div>
+            )
+        } else {
+            return (
+                <button className="sign-up" onClick={signUpPage}>Sign Up</button>
+            )
+        }
+    }
 
     const handleLogout = async () => {
         try {
@@ -48,19 +72,12 @@ function Header({ username, userId }) {
             <nav>
                 <a href="/dashboard">Practice</a>
                 <a href="/test" onClick={testPage}>Test</a>
-                {username ? <div className='profile' onClick={toggleOption}>
-                    <h3>
-                        {username[0]}
-                    </h3>
-                    {showOptions && <div className='dropdown'>
-                        <ul>
-                            <li onClick={handleLogout}>Log out</li>
-                        </ul>
-                    </div>}
-                </div> : <button className="sign-up" onClick={signUpPage}>Sign Up</button>}
+                {UserExists()}
             </nav>
         </header >
     );
+
 }
+
 
 export default Header;

@@ -21,6 +21,8 @@ class User(BaseModel, Base):
         name = Column(String(128), nullable=True)
         average_wpm = Column(Float, default=0.0)
         average_accuracy = Column(Float, default=0.0)
+        picture = Column(String(250), nullable=True)
+
         __table_args__ = (
             CheckConstraint('password IS NOT NULL OR sub IS NOT NULL'),
             CheckConstraint('username IS NOT NULL OR name IS NOT NULL')

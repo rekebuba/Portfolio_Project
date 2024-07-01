@@ -22,6 +22,7 @@ const SignUp = () => {
 
     const Dashboard = (userData) => {
         navigate('/dashboard', { state : { user: userData.data } });
+        window.location.reload();
     };
 
     useEffect(() => {
@@ -145,9 +146,9 @@ const SignUp = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required />
                 </div>
-                <Link to="/login" className="have_acc">
-                    Already have an account? <span style={{ textDecoration: 'underline', color: 'blue' }}>Log in here</span>
-                </Link>
+                <h6 className="have_acc">
+                    Already have an account? <Link to="/login">Log in here</Link>
+                </h6>
                 <p className='warning'>{warning}</p>
                 <button className="login" type="submit">Sign Up</button>
                 <div id="signInDiv" className='googlebutton'></div>
