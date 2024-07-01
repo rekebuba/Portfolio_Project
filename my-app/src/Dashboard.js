@@ -10,14 +10,14 @@ const Dashboard = () => {
     const [userText, setUserText] = useState('');
     const [username, setUserName] = useState('');
     const [userId, setUserId] = useState('');
-    const [incorectFormat, setIncorectFormat] = useState(false);
+    const [incorrectFormat, setIncorrectFormat] = useState(false);
     const navigate = useNavigate();
 
     const typingPage = () => {
         if (userText) {
             navigate('/typing', { state: { text: userText, user_id: userId } });
         } else {
-            setIncorectFormat(true);
+            setIncorrectFormat(true);
         }
     }
 
@@ -57,9 +57,9 @@ const Dashboard = () => {
                                 placeholder="add text to begin the test..."
                                 onChange={(e) => {
                                     validText(e.target.value);
-                                    setIncorectFormat(false);
+                                    setIncorrectFormat(false);
                                 }}
-                                style={{ border: incorectFormat ? "2px solid red" : '' }}
+                                style={{ border: incorrectFormat ? "2px solid red" : '' }}
                             />
                         </div>
                         <button className="start-button" onClick={typingPage}>Start Test</button>

@@ -35,7 +35,6 @@ function LandingPage() {
                             <p>Ready to see how fast you can type? Take our typing speed test to find out! Our comprehensive test
                                 measures your words per minute (WPM) and accuracy, giving you detailed feedback on your performance.
                                 Compete with friends or challenge yourself to beat your personal best!</p>
-                            {/* <button className="section-button" onClick={signInpage}>Button</button> */}
                         </div>
                         <div className="image">
                             <img src={timer} />

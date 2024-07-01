@@ -14,7 +14,7 @@ function Result() {
         navigate('/dashboard', { state: { wpm: results.wpm, accuracy: results.accuracy } })
     };
 
-    function togleRefresh() {
+    function refreshPage() {
         window.history.back();
     }
 
@@ -34,7 +34,7 @@ function Result() {
                     </div>
                 </div>
                 <div className='button-container'>
-                    <button className="retry-button" onClick={togleRefresh}>Retry Test</button>
+                    <button className="retry-button" onClick={refreshPage}>Retry Test</button>
                     <button className="retry-button" onClick={Dashboard}>Back to Dashboard</button>
                 </div>
             </div>

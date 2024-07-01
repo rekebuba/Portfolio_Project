@@ -17,17 +17,8 @@ import Dashboard from './Dashboard';
 import TypingPage from './Typing';
 import TestTime from './TestTime';
 import Result from './Result';
+import NotFound from './NotFound';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-// const HomePage = () => {
-//   return (
-//     <div>
-//       <Header />
-//       <LandingPage />
-//       <Footer />
-//     </div>
-//   );
-// };
 
 const App = () => {
   const { authenticated } = useAuth();
@@ -35,7 +26,8 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <LandingPage />
+      element: <LandingPage />,
+      errorElement: <NotFound />,
     },
     {
       path: '/dashboard',

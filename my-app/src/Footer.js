@@ -1,6 +1,5 @@
 import React from 'react';
 import profile from './images/profile.jpg'
-import linkdin from './images/linkdin.png'
 
 function Footer() {
     return (
