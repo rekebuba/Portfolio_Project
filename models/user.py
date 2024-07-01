@@ -24,7 +24,6 @@ class User(BaseModel, Base):
             CheckConstraint('password IS NOT NULL OR sub IS NOT NULL'),
             CheckConstraint('username IS NOT NULL OR name IS NOT NULL')
         )
-        pages = relationship("Page", backref="user")
         scores = relationship("Score", backref="user")
     else:
         email = ""

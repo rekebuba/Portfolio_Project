@@ -17,5 +17,5 @@ class Paragraph(BaseModel, Base):
         text = ""
 
     def __init__(self, *args, **kwargs):
-        """initializes Page"""
+        """initializes paragraph"""
         super().__init__(*args, **kwargs)
