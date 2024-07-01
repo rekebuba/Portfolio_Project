@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Result from './Result'
+import { useNavigate } from 'react-router-dom'
 
-const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet }) => {
+
+const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }) => {
     const [countDown, setTimeDown] = useState(initialMinutes * 60);
     const [countUp, setTimeUp] = useState(0);
     const [isTimeUp, setIsTimeUp] = useState(false);
     const [results, setResults] = useState(null);
 
-    const location = useLocation();
-    const user_id = location.state?.user_id || "";
+    const navigate = useNavigate();
 
+    const resultPage = () => {
+        navigate('/result', {state: {results: results, user_id: user_id}})
+    };
 
     useEffect(() => {
         if (isTimeUp || complet) return;
@@ -84,7 +88,7 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet }) => {
         <>
             {isTimeUp || complet ? (
                 results ? (
-                    <Result user_id={user_id} results={results} />
+                    resultPage()
                 ) : (
                     <div>Loading...</div>
                 )

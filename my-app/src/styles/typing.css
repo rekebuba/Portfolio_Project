@@ -1,4 +1,5 @@
-.typing-test-body {
+.typing-test-body,
+.typing-result-body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     display: flex;
@@ -30,15 +31,20 @@
     height: 100%;
     background-color: #f9f9f9;
     border-radius: 4px;
+    overflow: hidden;
     overflow-y: scroll;
 }
 
 /* prevent the content from being selected or copied */
 .text-to-type {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Standard */
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Standard */
 }
 
 .screenBasic-letter {
@@ -59,9 +65,17 @@
 }
 
 @keyframes cursorBlink {
-    0% { border-color: #3295db; }
-    50% { border-color: transparent; }
-    100% { border-color: #3295db; }
+    0% {
+        border-color: #3295db;
+    }
+
+    50% {
+        border-color: transparent;
+    }
+
+    100% {
+        border-color: #3295db;
+    }
 }
 
 .active-char {
@@ -205,23 +219,57 @@
 }
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    10% { transform: translateX(-10px); }
-    20% { transform: translateX(10px); }
-    30% { transform: translateX(-10px); }
-    40% { transform: translateX(10px); }
-    50% { transform: translateX(-10px); }
-    60% { transform: translateX(10px); }
-    70% { transform: translateX(-10px); }
-    80% { transform: translateX(10px); }
-    90% { transform: translateX(-10px); }
-    100% { transform: translateX(0); }
+    0% {
+        transform: translateX(0);
+    }
+
+    10% {
+        transform: translateX(-10px);
+    }
+
+    20% {
+        transform: translateX(10px);
+    }
+
+    30% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+
+    60% {
+        transform: translateX(10px);
+    }
+
+    70% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    90% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 /* Apply the shake animation to the div */
 .shake {
-    animation: shake 0.1s; /* Duration of the animation */
-    animation-iteration-count: 1; /* Number of times the animation should repeat */
+    animation: shake 0.1s;
+    /* Duration of the animation */
+    animation-iteration-count: 1;
+    /* Number of times the animation should repeat */
 }
 
 .first-char {

@@ -11,11 +11,11 @@ function TypingPage() {
     const text = location.state?.text || "";
     const timer = location.state?.timer || 0;
     const format = location.state?.format || "";
+    const user_id = location.state?.user_id || "";
     const [styledText, setStyledText] = useState(text);
     const [complet, setComplet] = useState(false);
 
     const [typedKeys, setTypedKeys] = useState('');
-    const scrollableDivRef = useRef(null);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
@@ -88,9 +88,9 @@ function TypingPage() {
     }, [typedKeys]);
 
     return (
-        <body className='typing-test-body'>
-            {<Timer format={format === 'timed' ? 'countDown' : 'countUp'} initialMinutes={timer} typedKeys={typedKeys} text={text} complet={complet} />}
-            <div ref={scrollableDivRef} className="typing-test-container">
+        <div className='typing-test-body'>
+            {<Timer format={format === 'timed' ? 'countDown' : 'countUp'} initialMinutes={timer} typedKeys={typedKeys} text={text} complet={complet} user_id={user_id} />}
+            <div className="typing-test-container">
                 {isCapsLockOn && (
                     <div className='caps-lock'>
                         <div>
@@ -103,7 +103,7 @@ function TypingPage() {
                     {styledText}
                 </div>
             </div>
-        </body>
+        </div>
     )
 }
 

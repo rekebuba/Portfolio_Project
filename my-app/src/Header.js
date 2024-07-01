@@ -39,7 +39,7 @@ function Header({ username, userId }) {
         <header className='header'>
             <img src={logo} className="site-name" alt="Site Logo" />
             <nav>
-                <a href="#">Practice</a>
+                <a href="/text">Practice</a>
                 <a onClick={testPage}>Test</a>
                 <a href="#">Profile</a>
                 {username ? <div className='profile' onClick={togleOption}>

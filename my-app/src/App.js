@@ -15,6 +15,7 @@ import LogIn from './LoginForm'
 import Dashbord from './Dashboard';
 import TypingPage from './Typing';
 import TestTime from './TestTime';
+import Result from './Result';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const HomePage = () => {
@@ -57,6 +58,12 @@ const App = () => {
     {
       path: '/test',
       element: <TestTime />
+    },
+    {
+      path: '/result',
+      element: <div className='typing-result-body'>
+        <Result />
+      </div>
     }
   ]);
   return (

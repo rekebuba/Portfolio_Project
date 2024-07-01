@@ -49,22 +49,13 @@ const Dashbord = () => {
                 </div>
 
                 <main className="dashboard-main">
-                    <section id="practice" className="section">
-                        <h2>Practice Typing</h2>
-                        <div className="typing-area">
-                            <textarea placeholder="Start typing..." />
-                        </div>
-                        <button className="start-button">Start Practice</button>
-                    </section>
-
                     <section id="test" className="section">
-                        <h2>Typing Speed Test</h2>
+                        <h2>Practice Typing</h2>
                         <div className="test-area">
                             <textarea
-                                placeholder="Start typing to begin the test..."
+                                placeholder="add text to begin the test..."
                                 onChange={(e) => {
                                     validText(e.target.value);
-                                    // setUserText(e.target.value);
                                     setIncorectFormat(false);
                                 }}
                                 style={{ border: incorectFormat ? "2px solid red" : '' }}

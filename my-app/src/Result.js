@@ -1,8 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { saveScore } from './api';
 
-function Result({ user_id, results }) {
+
+function Result() {
+    const location = useLocation();
+    const user_id = location.state?.user_id || "";
+    const results = location.state?.results || "";
     const navigate = useNavigate();
 
     const Dashboard = () => {
@@ -11,7 +15,7 @@ function Result({ user_id, results }) {
     };
 
     function togleRefresh() {
-        window.location.reload();
+        window.history.back();
     }
 
     return (
