@@ -5,7 +5,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Column, String, CheckConstraint
+from sqlalchemy import Column, String, CheckConstraint, Float
 from sqlalchemy.orm import relationship
 from hashlib import md5
 
@@ -19,7 +19,8 @@ class User(BaseModel, Base):
         sub = Column(String(128), nullable=True)
         username = Column(String(128), nullable=True)
         name = Column(String(128), nullable=True)
-        
+        average_wpm = Column(Float, default=0.0)
+        average_accuracy = Column(Float, default=0.0)
         __table_args__ = (
             CheckConstraint('password IS NOT NULL OR sub IS NOT NULL'),
             CheckConstraint('username IS NOT NULL OR name IS NOT NULL')
@@ -31,6 +32,8 @@ class User(BaseModel, Base):
         sub = ""
         username = ""
         name = ""
+        average_wpm = 0
+        average_accuracy = 0
 
     def __init__(self, *args, **kwargs):
         """initializes user"""

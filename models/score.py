@@ -14,12 +14,9 @@ class Score(BaseModel, Base):
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         wpm = Column(Integer)
         accuracy = Column(Integer)
-        avrage = Column(Integer)
-
     else:
         wpm = int
         accuracy = int
-        avrage = int
 
     def __init__(self, *args, **kwargs):
         """initializes score"""
