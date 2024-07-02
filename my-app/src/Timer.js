@@ -4,7 +4,7 @@ import Result from './Result'
 import { useNavigate } from 'react-router-dom'
 
 
-const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }) => {
+const Timer = ({ format, initialMinutes = 1, typedKeys, text, complete, user_id }) => {
     const [countDown, setTimeDown] = useState(initialMinutes * 60);
     const [countUp, setTimeUp] = useState(0);
     const [isTimeUp, setIsTimeUp] = useState(false);
@@ -13,15 +13,15 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }
     const navigate = useNavigate();
 
     const resultPage = () => {
-        navigate('/result', {state: {results: results, user_id: user_id}})
+        navigate('/result', { state: { results: results, user_id: user_id } })
     };
 
     useEffect(() => {
-        if (isTimeUp || complet) return;
+        if (isTimeUp || complete) return;
         // count Down
         const countDownInterval = setInterval(() => {
             setTimeDown(prevTime => {
-                if (prevTime === 1 || complet) {
+                if (prevTime === 1 || complete) {
                     clearInterval(countDownInterval);
                     setIsTimeUp(true);
                 }
@@ -32,7 +32,7 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }
         // count Up
         const countUpInterval = setInterval(() => {
             setTimeUp(prevTime => {
-                if (complet) {
+                if (complete) {
                     clearInterval(countUpInterval);
                     setIsTimeUp(true);
                 }
@@ -44,17 +44,17 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }
             clearInterval(countDownInterval);
             clearInterval(countUpInterval);
         };
-    }, [complet, isTimeUp, initialMinutes]);
+    }, [complete, isTimeUp, initialMinutes]);
 
     useEffect(() => {
-        if (complet || isTimeUp) {
+        if (complete || isTimeUp) {
             const strTypedTime = formatTime(countUp);
             const [minutes, seconds] = strTypedTime.split(':').map(Number);
             const TypedTime = minutes + (seconds / 60);
             const values = calculateResults(typedKeys, text, TypedTime);
             setResults(values);
         }
-    }, [complet, isTimeUp]);
+    }, [complete, isTimeUp]);
 
     const formatTime = (time) => {
         const getSeconds = `0${time % 60}`.slice(-2);
@@ -63,6 +63,12 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }
 
         return `${getMinutes} : ${getSeconds}`;
     };
+
+    /* 
+    Typing Test Logic:​
+        Algorithm to calculate typing speed (words per minute) and
+        accuracy (percentage of correctly typed characters).​
+    */
 
     function calculateResults(textTyped, originalText, typedTime) {
         const totalCharactersTyped = textTyped.length;
@@ -85,7 +91,7 @@ const Timer = ({ format, initialMinutes = 1, typedKeys, text, complet, user_id }
 
     return (
         <>
-            {isTimeUp || complet ? (
+            {isTimeUp || complete ? (
                 results ? (
                     resultPage()
                 ) : (

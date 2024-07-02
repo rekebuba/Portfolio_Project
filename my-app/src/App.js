@@ -7,8 +7,6 @@ import './styles/typing.css'
 import './styles/timer.css'
 import './styles/testTime.css'
 import './styles/header.css';
-import Header from './Header';
-import Footer from './Footer';
 import LandingPage from './LandingPage';
 import { AuthProvider, useAuth } from './AuthContext';
 import SignUp from './SighUpForm';

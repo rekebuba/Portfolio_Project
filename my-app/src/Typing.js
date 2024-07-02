@@ -13,7 +13,7 @@ function TypingPage() {
     const format = location.state?.format || "";
     const user_id = location.state?.user_id || "";
     const [styledText, setStyledText] = useState(text);
-    const [complet, setComplet] = useState(false);
+    const [complete, setComplete] = useState(false);
 
     const [typedKeys, setTypedKeys] = useState('');
 
@@ -53,43 +53,45 @@ function TypingPage() {
 
         // Create a new styled text array
         const newStyledText = textArray.map((char, idx) => {
+            const isActive = idx === typedKeys.length;
+            const isCorrect = typedKeys[idx] === char;
+            const modifiedCharClass = `screenBasic-letter ${isCorrect ? 'correct-char' : 'incorrect-char'}`;
+            const basicCharClass = `screenBasic-letter ${isActive ? 'active-char' : ''} `;
+            const displayChar = char === ' ' ? '\u00A0' : char;
+
             if (idx < typedKeys.length) {
                 // setIncorrectChar(typedKeys[idx] !== char ? text[idx = 1] : '')
-                return (char === '\u21B5' ?
+                return char === '\u21B5' ? (
                     <>
-                        <div
-                            className={`screenBasic-letter ${typedKeys[idx] === char ? 'correct-char' : 'incorrect-char'}`}>
-                            {char === ' ' ? '\u00A0' : char}
-                        </div>
-                        <div className={'break'}></div>
+                        <div className={modifiedCharClass}>{displayChar}</div>
+                        <div className="break"></div>
                     </>
-                    :
-                    <div
-                        className={`screenBasic-letter ${typedKeys[idx] === char ? 'correct-char' : 'incorrect-char'}`}>
-                        {char === ' ' ? '\u00A0' : char}
-                    </div>
+                ) : (
+                    <div className={modifiedCharClass}>{displayChar}</div>
                 );
             }
-            return (char === '\u21B5' ?
+
+            return char === '\u21B5' ? (
                 <>
-                    <div className={`screenBasic-letter ${idx === typedKeys.length ? 'active-char' : ''}`}>{char === ' ' ? '\u00A0' : char}</div>
-                    <div className={'break'}></div>
-                </> :
-                <div className={`screenBasic-letter ${idx === typedKeys.length ? 'active-char' : ''}`}>{char === ' ' ? '\u00A0' : char}</div>
+                    <div className={basicCharClass}>{displayChar}</div>
+                    <div className="break"></div>
+                </>
+            ) : (
+                <div className={basicCharClass}>{displayChar}</div>
             );
         });
 
         setStyledText(newStyledText);
 
         if (typedKeys.length === text.length) {
-            setComplet(true);
+            setComplete(true);
         }
 
     }, [typedKeys]);
 
     return (
         <div className='typing-test-body'>
-            {<Timer format={format === 'timed' ? 'countDown' : 'countUp'} initialMinutes={timer} typedKeys={typedKeys} text={text} complet={complet} user_id={user_id} />}
+            {<Timer format={format === 'timed' ? 'countDown' : 'countUp'} initialMinutes={timer} typedKeys={typedKeys} text={text} complete={complete} user_id={user_id} />}
             <div className="typing-test-container">
                 {isCapsLockOn && (
                     <div className='caps-lock'>
