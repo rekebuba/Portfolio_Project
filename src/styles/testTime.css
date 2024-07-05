@@ -1,0 +1,50 @@
+.timer-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border-color: 1px solid #DDDDDD;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.dashboard-container h1 {
+    margin-bottom: 20px;
+    margin: 20px;
+    color: #333;
+}
+
+.test-timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.test-timer {
+    background-color: #fff;
+    border: 2px solid #DDD;
+    padding: 50px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.test-timer p {
+    font-size: 24px;
+    margin: 0 0 20px;
+}
+
+.test-button {
+    background-color: #0000ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.test-button:hover {
+    background-color: #000099;
+}
