@@ -30,18 +30,22 @@ Check out the live demo [here](https://cachekeys.com).
 1. Clone the repository:
     ```bash
    git clone https://github.com/rekebuba/Portfolio_Project.git
-2. Install dependencies for the backend:
+2. Install dependencies for the models:
     ```bash
-    cd backend
-    pip install -r requirements.txt
+    pip install flask flask-cors flasgger sqlalchemy
 3. Install dependencies for the frontend:
     ```bash
-    cd ../frontend
-    npm install
-4. Start the development server
+    cd ../my-app
+    npm install --save react-scripts
+4. prepares a MySQL Database for the project
+    ```bash
+    cat setup_mysql_dev.sql | mysql -uroot -p
+5. Start the development server
     ```bash
     npm start
-
+6. On a new Terminal
+    ```bash
+    KEY_MYSQL_USER=key_dev KEY_MYSQL_PWD=key_dev_pwd KEY_MYSQL_HOST=localhost KEY_MYSQL_DB=key_dev_db KEY_TYPE_STORAGE=db python3 -m api.v1.app
 ## Usage
 
 - Open your browser and navigate to http://localhost:3000.
