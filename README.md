@@ -1,5 +1,7 @@
 # CacheKeys
 
+![CacheKeys Screenshot](./my-app/src/images/logoName.png)
+
 ## Project Description
 CacheKeys is a web application designed to help users practice and improve their typing speed and accuracy. It provides engaging typing tests and tracks user progress over time.
 
