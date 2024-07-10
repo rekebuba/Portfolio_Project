@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" objects that handle all default RestFul API actions for Users practice text(page) """
+"""
+objects that handle all default RestFul API actions
+for Users practice text(page)
+"""
 from models.user import User
 from models.paragraph import Paragraph
 from models import storage

@@ -7,6 +7,7 @@ import sqlalchemy
 from sqlalchemy import Column, Text
 from sqlalchemy.orm import relationship
 
+
 class Paragraph(BaseModel, Base):
     """Representation of a text that a user practices"""
     if models.storage_t == 'db':

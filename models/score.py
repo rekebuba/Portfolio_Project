@@ -4,8 +4,9 @@
 import models
 from models.base_model import BaseModel, Base
 import sqlalchemy
-from sqlalchemy import Column, String, CheckConstraint, ForeignKey, Text, Integer
+from sqlalchemy import Column, String, ForeignKey, Integer
 from sqlalchemy.orm import relationship
+
 
 class Score(BaseModel, Base):
     """Representation of a score that a user practices"""

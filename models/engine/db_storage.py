@@ -88,7 +88,10 @@ class DBStorage:
         for value in all_cls.values():
             if (value.id == id or value.sub == sub):
                 return value
-            elif (value.username == user and value.password == md5(pas.encode()).hexdigest()):
+            elif (
+                value.username == user and
+                value.password == md5(pas.encode()).hexdigest()
+            ):
                 return value
 
         return None
