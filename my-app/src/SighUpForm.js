@@ -8,6 +8,7 @@ const SignUp = () => {
     const { signUp } = useAuth();
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const debouncedUsername = useDebounce(username, 1500);
     const [password, setPassword] = useState('');
 
     const [isValid, setIsValid] = useState(false);
@@ -21,7 +22,7 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const Dashboard = (userData) => {
-        navigate('/dashboard', { state : { user: userData.data } });
+        navigate('/dashboard', { state: { user: userData.data } });
         window.location.reload();
     };
 
@@ -40,13 +41,13 @@ const SignUp = () => {
 
     useEffect(() => {
         const validateUsername = async () => {
-            const { isValid, errorMessage } = await checkValidity(email, username, password);
+            const { isValid, errorMessage } = await checkValidity(email, debouncedUsername, password);
             setIsValid(isValid);
             setErrorMessage(errorMessage);
         };
 
         validateUsername();
-    }, [email, username, password]);
+    }, [email, debouncedUsername, password]);
 
     async function checkValidity(email = '', user = '', pass = '') {
         if (email) {
@@ -122,6 +123,24 @@ const SignUp = () => {
             alert('Failed to log in with Google');
         }
     };
+
+    // Custom hook for debouncing
+    function useDebounce(value, delay) {
+        const [debouncedValue, setDebouncedValue] = useState(value);
+
+        useEffect(() => {
+            const handler = setTimeout(() => {
+                setDebouncedValue(value);
+            }, delay);
+
+            // Cleanup function to clear timeout if value or delay changes
+            return () => {
+                clearTimeout(handler);
+            };
+        }, [value, delay]);
+
+        return debouncedValue;
+    }
 
     return (
         <div className="login-container">
